@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mundial - Momentos Clave</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚽ Mundial - Momentos Clave</h1>
+            <p>Revive las mejores jugadas con filtros interactivos</p>
+        </div>
+
+        <div class="top-menu">
+            <div class="menu-icon" title="Escáner">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 15.5c1.93 0 3.5-1.57 3.5-3.5s-1.57-3.5-3.5-3.5-3.5 1.57-3.5 3.5 1.57 3.5 3.5 3.5zM9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9z"/>
+                </svg>
+            </div>
+            <div class="menu-icon" title="Videos">
+                <svg viewBox="0 0 24 24">
+                    <path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/>
+                </svg>
+            </div>
+            <div class="menu-icon" title="3D">
+                <svg viewBox="0 0 24 24">
+                    <path d="M3 3h18v18H3V3m16 16V5H5v14h14m-6-2.5l-4-4 4-4v8z"/>
+                </svg>
+            </div>
+            <div class="menu-icon" title="Estadísticas">
+                <svg viewBox="0 0 24 24">
+                    <path d="M5 9.2h3V19H5zM10.6 5h2.8v14h-2.8zm5.6 8H19v6h-2.8z"/>
+                </svg>
+            </div>
+            <div class="menu-icon" title="Objetivos">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm0-14c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Video 1 -->
+        <div class="video-section">
+            <div class="video-container">
+                <div class="video-wrapper">
+                    <video id="video1" loop>
+                        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+                    </video>
+                    <div class="play-button" onclick="togglePlay('video1', this)"></div>
+                </div>
+                <div class="filter-buttons">
+                    <button class="filter-btn sepia" onclick="applyFilter('video1', 'sepia', this)">Sepia</button>
+                    <button class="filter-btn bw" onclick="applyFilter('video1', 'bw', this)">Blanco y Negro</button>
+                    <button class="filter-btn cold" onclick="applyFilter('video1', 'cold', this)">Frío</button>
+                    <button class="filter-btn original" onclick="applyFilter('video1', 'original', this)">Original</button>
+                    <label class="filter-btn upload">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/>
+                        </svg>
+                        <span>Subir</span>
+                        <input type="file" accept="video/*" onchange="uploadVideo('video1', this)" style="display: none;">
+                    </label>
+                </div>
+                <div class="video-title">Messi - Copa del Mundo 2022</div>
+            </div>
+        </div>
+
+        <!-- Video 2 -->
+        <div class="video-section">
+            <div class="video-container">
+                <div class="video-wrapper">
+                    <video id="video2" loop>
+                        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" type="video/mp4">
+                    </video>
+                    <div class="play-button" onclick="togglePlay('video2', this)"></div>
+                </div>
+                <div class="filter-buttons">
+                    <button class="filter-btn sepia" onclick="applyFilter('video2', 'sepia', this)">Sepia</button>
+                    <button class="filter-btn bw" onclick="applyFilter('video2', 'bw', this)">Blanco y Negro</button>
+                    <button class="filter-btn cold" onclick="applyFilter('video2', 'cold', this)">Frío</button>
+                    <button class="filter-btn original" onclick="applyFilter('video2', 'original', this)">Original</button>
+                    <label class="filter-btn upload">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/>
+                        </svg>
+                        <span>Subir</span>
+                        <input type="file" accept="video/*" onchange="uploadVideo('video2', this)" style="display: none;">
+                    </label>
+                </div>
+                <div class="video-title">Aqui va texto descriptivo del vídeo</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
