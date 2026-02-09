@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FutCam 1.0 - Escáner</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/public/css/main.css">
+    <link rel="stylesheet" href="/public/css/scanner.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚽ FutCam 1.0</h1>
+            <p>Escanea tu camisa favorita</p>
+        </div>
+
+        <div class="top-menu">
+            <div class="menu-icon active" title="Escáner">
+                <i class="fa-solid fa-camera"></i>
+            </div>
+            <div class="menu-icon" title="Videos" onclick="window.location.href='main.html'">
+                <i class="fa-solid fa-video"></i>
+            </div>
+            <div class="menu-icon" title="3D">
+                <i class="fa-solid fa-cube"></i>
+            </div>
+            <div class="menu-icon" title="Estadísticas">
+                <i class="fa-solid fa-chart-bar"></i>
+            </div>
+            <div class="menu-icon" title="Objetivos">
+                <i class="fa-solid fa-bullseye"></i>
+            </div>
+        </div>
+
+        <!-- Pantalla de escaneo -->
+        <div class="scanner-section" id="scannerSection">
+            <div class="scanner-container">
+                <div class="scanner-overlay">
+                    <h2>Escanea tu camisa favorita</h2>
+                    <div class="scan-frame">
+                        <div class="corner top-left"></div>
+                        <div class="corner top-right"></div>
+                        <div class="corner bottom-left"></div>
+                        <div class="corner bottom-right"></div>
+                        <div class="scan-line"></div>
+                    </div>
+                    <button class="scan-button" id="scanButton">
+                        <span>ESCANEAR</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pantalla de cámara -->
+        <div class="camera-section hidden" id="cameraSection">
+            <div class="camera-container">
+                <div class="camera-view">
+                    <video id="cameraStream" autoplay playsinline></video>
+                    <div class="camera-overlay">
+                        <div class="scan-frame active">
+                            <div class="corner top-left"></div>
+                            <div class="corner top-right"></div>
+                            <div class="corner bottom-left"></div>
+                            <div class="corner bottom-right"></div>
+                            <div class="scan-line scanning"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="camera-controls">
+                    <button class="camera-btn cancel" id="cancelButton">
+                        <i class="fa-solid fa-xmark"></i>
+                        <span>Cancelar</span>
+                    </button>
+                    <button class="camera-btn capture" id="captureButton">
+                        <i class="fa-solid fa-camera"></i>
+                        <span>Capturar</span>
+                    </button>
+                    <button class="camera-btn switch" id="switchButton">
+                        <i class="fa-solid fa-rotate"></i>
+                        <span>Voltear</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Resultado del escaneo -->
+        <div class="result-section hidden" id="resultSection">
+            <div class="result-container">
+                <h2>¡Escaneo completado! ✓</h2>
+                <canvas id="capturedImage"></canvas>
+                <div class="result-buttons">
+                    <button class="result-btn save">
+                        <i class="fa-solid fa-download"></i>
+                        Guardar
+                    </button>
+                    <button class="result-btn retry" id="retryButton">
+                        <i class="fa-solid fa-redo"></i>
+                        Escanear de nuevo
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/public/js/script.js"></script>
+    <script src="/public/js/scanner.js"></script>
+</body>
+</html>
