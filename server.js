@@ -1,39 +1,47 @@
-// server.js - Servidor simple para probar FutCam localmente
+// server.js - Servidor FutCam con sistema de rutas
 const express = require('express');
 const path = require('path');
+const pageRoutes = require('./rutas/rutas.js');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Servir archivos estáticos desde la carpeta public
-app.use(express.static('public'));
+// Middleware para parsear JSON (por si lo necesitas después)
+app.use(express.json());
 
-// Ruta principal redirige a main.html
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'main.html'));
+// Servir archivos estáticos desde la carpeta public
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Usar las rutas definidas en rutas.js
+app.use('/', pageRoutes);
+
+// Manejo de rutas no encontradas (404)
+app.use((req, res) => {
+    res.status(404).sendFile('main.html', { root: './public' });
 });
 
 // Iniciar servidor
 app.listen(PORT, () => {
     console.log(`
     ╔═══════════════════════════════════════╗
-    ║        🎥 FutCam Server 1.0 🎥       ║
+    ║        🎥 FutCam Server 2.0 🎥       ║
     ╚═══════════════════════════════════════╝
     
     ✅ Servidor corriendo en: http://localhost:${PORT}
     
-    📄 Páginas disponibles:
-       • http://localhost:${PORT}/main.html
-       • http://localhost:${PORT}/scanner.html
-       • http://localhost:${PORT}/Modelo.html
-       • http://localhost:${PORT}/Estadisticas.html
-       • http://localhost:${PORT}/Tareas.html
+    📄 Rutas disponibles:
+       • http://localhost:${PORT}/              → Página principal (main)
+       • http://localhost:${PORT}/main          → Videos con filtros
+       • http://localhost:${PORT}/scanner       → Escáner de camisetas
+       • http://localhost:${PORT}/modelo        → Visualizador 3D
+       • http://localhost:${PORT}/estadisticas  → Gráficas
+       • http://localhost:${PORT}/tareas        → Quiz
     
-    🎨 Nuevos filtros implementados:
+    🎨 Filtros implementados:
        • Desenfoque (Blur)
        • Pixelado
        • Cámara Térmica
-       • Colores Pastel
+       • Colores Fríos
     
     🛑 Presiona Ctrl+C para detener el servidor
     `);
