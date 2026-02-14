@@ -1,4 +1,4 @@
-/* === main.css (personalizado para main.html) === */
+/* === main_custom.css (personalizado para main.html) === */
 
 .card-filters {
     display: flex;
@@ -29,21 +29,31 @@
     border: none;
 }
 
-.filter-btn.sepia {
-    background: #e2c08d;
-    color: #3a2c13;
-    border: none;
-}
-.filter-btn.bw {
-    background: #e0e0e0;
-    color: #222;
-    border: none;
-}
-.filter-btn.cold {
-    background: #d0e7ff;
+/* Nuevos filtros personalizados */
+.filter-btn.blur {
+    background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);
     color: #1a2a3a;
     border: none;
 }
+
+.filter-btn.pixelated {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    color: #2a1a13;
+    border: none;
+}
+
+.filter-btn.thermal {
+    background: linear-gradient(135deg, #ff0844 0%, #ffb199 100%);
+    color: #fff;
+    border: none;
+}
+
+.filter-btn.cold {
+    background: linear-gradient(135deg, #a8e6cf 0%, #3edbf0 100%);
+    color: #1a2a3a;
+    border: none;
+}
+
 .filter-btn.upload {
     background: #fff;
     color: #222;
@@ -79,21 +89,50 @@
 /* FILTROS VISUALES PARA LOS VIDEOS */
 /* ========================================= */
 
-video.filter-sepia {
-    filter: sepia(90%) saturate(120%) brightness(105%);
+/* 1. Desenfoque (Blur) */
+video.filter-blur {
+    filter: blur(4px);
 }
 
-video.filter-bw {
-    filter: grayscale(100%) contrast(110%);
+/* 2. Pixelado (Pixelated) - Efecto mejorado */
+video.filter-pixelated {
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+    filter: contrast(140%) saturate(160%) brightness(105%);
 }
 
+/* Truco: reducir tamaño y escalar para forzar pixelación */
+.video-wrapper video.filter-pixelated {
+    width: 40%;
+    height: 40%;
+    object-fit: fill;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(2.5);
+}
+
+/* 3. Cámara térmica (Thermal) */
+video.filter-thermal {
+    filter: hue-rotate(280deg) saturate(300%) contrast(150%) brightness(90%);
+}
+
+/* 4. Colores fríos (Cold) */
 video.filter-cold {
     filter: hue-rotate(180deg) saturate(150%) brightness(95%);
 }
 
-/* Transición suave al cambiar filtros */
-video {
+/* Transición suave al cambiar filtros (excepto pixelado) */
+video:not(.filter-pixelated) {
     transition: filter 0.4s ease;
+}
+
+/* Restaurar posición cuando NO tiene filtro pixelado */
+.video-wrapper video:not(.filter-pixelated) {
+    width: 100%;
+    height: 100%;
+    transform: none;
 }
 
 @media (max-width: 480px) {
