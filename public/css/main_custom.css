@@ -1,0 +1,108 @@
+/* === main.css (personalizado para main.html) === */
+
+.card-filters {
+    display: flex;
+    gap: 12px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.4);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 12px 24px;
+    border: 1px solid transparent;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #f0f0f0;
+}
+
+.filter-btn.original {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    border: none;
+}
+
+.filter-btn.sepia {
+    background: #e2c08d;
+    color: #3a2c13;
+    border: none;
+}
+.filter-btn.bw {
+    background: #e0e0e0;
+    color: #222;
+    border: none;
+}
+.filter-btn.cold {
+    background: #d0e7ff;
+    color: #1a2a3a;
+    border: none;
+}
+.filter-btn.upload {
+    background: #fff;
+    color: #222;
+    border: none;
+    padding: 12px 16px;
+    min-width: 44px;
+    justify-content: center;
+}
+.filter-btn.upload .fa-solid {
+    color: #222;
+    font-size: 18px;
+}
+.filter-btn.upload input[type="file"] {
+    display: none;
+}
+
+.filter-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.filter-btn.active {
+    box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.5);
+    transform: scale(1.05);
+}
+
+.card-media {
+    width: 100%;
+    position: relative;
+}
+
+/* ========================================= */
+/* FILTROS VISUALES PARA LOS VIDEOS */
+/* ========================================= */
+
+video.filter-sepia {
+    filter: sepia(90%) saturate(120%) brightness(105%);
+}
+
+video.filter-bw {
+    filter: grayscale(100%) contrast(110%);
+}
+
+video.filter-cold {
+    filter: hue-rotate(180deg) saturate(150%) brightness(95%);
+}
+
+/* Transición suave al cambiar filtros */
+video {
+    transition: filter 0.4s ease;
+}
+
+@media (max-width: 480px) {
+    .card-filters {
+        padding: 15px;
+        gap: 8px;
+    }
+    .filter-btn {
+        padding: 10px 18px;
+        font-size: 12px;
+    }
+}

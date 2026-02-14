@@ -1,0 +1,45 @@
+/* === Estadisticas.css === */
+
+.estadisticas-title {
+    color: #fff;
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.estadisticas-card {
+    align-items: center;
+    background: none;
+    box-shadow: none;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#statsChart {
+    max-width: 90vw;
+    margin: 0 auto;
+    display: block;
+}
+
+
+.estadisticas-img {
+    width: 480px;
+    height: 220px;
+    max-width: 98vw;
+    border-radius: 18px;
+    background: #fff;
+    display: block;
+    margin: 0 auto;
+    object-fit: cover;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+}
+
+@media (max-width: 480px) {
+    .estadisticas-img {
+        width: 98vw;
+        height: auto;
+    }
+}

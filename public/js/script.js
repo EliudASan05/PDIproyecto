@@ -13,8 +13,9 @@ function togglePlay(videoId, button) {
 // Función para aplicar filtros al video
 function applyFilter(videoId, filterType, button) {
     const video = document.getElementById(videoId);
-    const container = video.closest('.video-container');
-    const allButtons = container.querySelectorAll('.filter-btn:not(.upload)');
+    const container = video.closest('.video-wrapper');
+    const card = video.closest('.card');
+    const allButtons = card.querySelectorAll('.filter-btn:not(.upload)');
     
     // Remover clase active de todos los botones
     allButtons.forEach(btn => btn.classList.remove('active'));
@@ -45,11 +46,6 @@ function uploadVideo(videoId, input) {
         // Cargar el nuevo video
         video.querySelector('source').src = url;
         video.load();
-        
-        // Actualizar el título del video
-        const container = video.closest('.video-container');
-        const titleElement = container.querySelector('.video-title');
-        titleElement.textContent = file.name.replace(/\.[^/.]+$/, ""); // Nombre sin extensión
         
         console.log('Video cargado exitosamente:', file.name);
     } else {

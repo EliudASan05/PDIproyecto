@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,79 +6,70 @@
     <title>FutCam 1.0</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="/public/css/main.css">
+    <link rel="stylesheet" href="/public/css/main_custom.css">
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>⚽ FutCam 1.0</h1>
-            <p>Revive las mejores jugadas con filtros interactivos</p>
-        </div>
-
+        <header class="main-header">
+            <img src="/public/media/FutCam.png" alt="FutCam Logo" />
+            <h1 class="site-title">FutCam</h1>
+        </header>
         <div class="top-menu">
-            <div class="menu-icon" title="Escáner" onclick="window.location.href='scanner.html'">
-                <i class="fa-solid fa-camera"></i>
-            </div>
-            <div class="menu-icon" title="Videos">
-                <i class="fa-solid fa-video"></i>
-            </div>
-            <div class="menu-icon" title="3D">
-              <i class="fa-solid fa-cube"></i>
-            </div>
-            <div class="menu-icon" title="Estadísticas">
-                <i class="fa-solid fa-chart-bar"></i>
-            </div>
-            <div class="menu-icon" title="Objetivos">
-                <i class="fa-solid fa-bullseye"></i>
-            </div>
+            <div class="menu-icon" title="Escáner" onclick="window.location.href='scanner.html'"><i class="fa-solid fa-camera"></i></div>
+            <div class="menu-icon active" title="Videos"><i class="fa-solid fa-video"></i></div>
+            <div class="menu-icon" title="3D" onclick="window.location.href='Modelo.html'"><i class="fa-solid fa-cube"></i></div>
+            <div class="menu-icon" title="Estadísticas" onclick="window.location.href='Estadisticas.html'"><i class="fa-solid fa-chart-bar"></i></div>
+            <div class="menu-icon" title="Objetivos" onclick="window.location.href='Tareas.html'"><i class="fa-solid fa-bullseye"></i></div>
         </div>
 
-        <!-- Video 1 -->
-        <div class="video-section">
-            <div class="video-container">
-                <div class="video-wrapper">
-                    <video id="video1" loop>
-                        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
-                    </video>
-                    <div class="play-button" onclick="togglePlay('video1', this)"></div>
-                </div>
-                <div class="filter-buttons">
-                    <button class="filter-btn sepia" onclick="applyFilter('video1', 'sepia', this)">Sepia</button>
-                    <button class="filter-btn bw" onclick="applyFilter('video1', 'bw', this)">Blanco y Negro</button>
-                    <button class="filter-btn cold" onclick="applyFilter('video1', 'cold', this)">Frío</button>
-                    <button class="filter-btn original" onclick="applyFilter('video1', 'original', this)">Original</button>
+        <div class="content-list">
+            <!-- Tarjeta 1 -->
+            <div class="card">
+                <div class="card-filters">
+                    <button class="filter-btn original" onclick="applyFilter('video1', 'original', this)">ORIGINAL</button>
+                    <button class="filter-btn sepia" onclick="applyFilter('video1', 'sepia', this)">SEPIA</button>
+                    <button class="filter-btn bw" onclick="applyFilter('video1', 'bw', this)">BLANCO Y NEGRO</button>
+                    <button class="filter-btn cold" onclick="applyFilter('video1', 'cold', this)">FRÍO</button>
                     <label class="filter-btn upload">
                         <i class="fa-solid fa-upload"></i>
-                        <span>Subir</span>
                         <input type="file" accept="video/*" onchange="uploadVideo('video1', this)" style="display: none;">
                     </label>
                 </div>
-                <div class="video-title">Messi - Copa del Mundo 2022</div>
-            </div>
-        </div>
-
-        <!-- Video 2 -->
-        <div class="video-section">
-            <div class="video-container">
-                <div class="video-wrapper">
-                    <video id="video2" loop>
-                        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" type="video/mp4">
-                    </video>
-                    <div class="play-button" onclick="togglePlay('video2', this)"></div>
+                <div class="card-media">
+                    <div class="video-wrapper">
+                        <video id="video1" loop>
+                            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+                        </video>
+                        <div class="play-button" onclick="togglePlay('video1', this)"></div>
+                    </div>
                 </div>
-                <div class="filter-buttons">
-                    <button class="filter-btn sepia" onclick="applyFilter('video2', 'sepia', this)">Sepia</button>
-                    <button class="filter-btn bw" onclick="applyFilter('video2', 'bw', this)">Blanco y Negro</button>
-                    <button class="filter-btn cold" onclick="applyFilter('video2', 'cold', this)">Frío</button>
-                    <button class="filter-btn original" onclick="applyFilter('video2', 'original', this)">Original</button>
+            </div>
+
+            <!-- Tarjeta 2 -->
+            <div class="card">
+                <div class="card-filters">
+                    <button class="filter-btn original" onclick="applyFilter('video2', 'original', this)">ORIGINAL</button>
+                    <button class="filter-btn sepia" onclick="applyFilter('video2', 'sepia', this)">SEPIA</button>
+                    <button class="filter-btn bw" onclick="applyFilter('video2', 'bw', this)">BLANCO Y NEGRO</button>
+                    <button class="filter-btn cold" onclick="applyFilter('video2', 'cold', this)">FRÍO</button>
                     <label class="filter-btn upload">
                         <i class="fa-solid fa-upload"></i>
-                        <span>Subir</span>
                         <input type="file" accept="video/*" onchange="uploadVideo('video2', this)" style="display: none;">
                     </label>
                 </div>
-                <div class="video-title">Aqui va texto descriptivo del vídeo</div>
+                <div class="card-media">
+                    <div class="video-wrapper">
+                        <video id="video2" loop>
+                            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" type="video/mp4">
+                        </video>
+                        <div class="play-button" onclick="togglePlay('video2', this)"></div>
+                    </div>
+                </div>
             </div>
         </div>
+        <footer class="main-footer">
+            Eliud / Joshua
+        </footer>
     </div>
 
     <script src="/public/js/script.js"></script>

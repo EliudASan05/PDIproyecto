@@ -1,0 +1,60 @@
+/* Centrado del título QUIZ */
+.quiz-title {
+    color: #fff;
+    margin: 24px 0 18px 0;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+/* === Tareas.css === */
+
+
+.quiz-difficulty {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-bottom: 30px;
+}
+.difficulty-card {
+    width: 180px;
+    height: 280px;
+    border-radius: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #222;
+    cursor: pointer;
+    box-shadow: 0 6px 28px rgba(0,0,0,0.18);
+    transition: transform 0.18s, box-shadow 0.18s;
+    user-select: none;
+    letter-spacing: 1px;
+}
+.difficulty-card:hover {
+    transform: translateY(-6px) scale(1.04);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.22);
+}
+.difficulty-easy {
+    background: #19d64a;
+    color: #fff;
+}
+.difficulty-medium {
+    background: #e2a94b;
+    color: #222;
+}
+.difficulty-hard {
+    background: #e23b2e;
+    color: #fff;
+}
+@media (max-width: 480px) {
+    .quiz-difficulty {
+        gap: 10px;
+    }
+    .difficulty-card {
+        width: 90px;
+        height: 140px;
+        font-size: 1rem;
+    }
+}

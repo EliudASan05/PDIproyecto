@@ -1,0 +1,53 @@
+/* === Modelo.css === */
+
+.card-media {
+    margin-top: 18px;
+}
+.card-media img {
+    width: 420px;
+    height: 220px;
+    max-width: 98vw;
+    border-radius: 16px;
+    background: #fff;
+    object-fit: cover;
+    display: block;
+}
+
+.model-arrows {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    margin: 24px 0 10px 0;
+}
+.model-arrows .filter-btn {
+    background: #fff;
+    color: #222;
+    font-size: 1.5rem;
+    padding: 10px 18px;
+}
+
+.model-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+.model-actions .filter-btn {
+    background: #fff;
+    color: #222;
+    font-weight: 700;
+}
+.model-actions .filter-btn:not(:first-child):not(:last-child) {
+    font-weight: 400;
+}
+
+@media (max-width: 480px) {
+    .card-media img {
+        width: 98vw;
+        height: 120px;
+    }
+    .model-arrows .filter-btn {
+        font-size: 1.1rem;
+        padding: 8px 10px;
+    }
+}
