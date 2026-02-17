@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FutCam - Información</title>
+    <title>FutCam - Escáner 3D</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/Modelo.css">
+    <link rel="stylesheet" href="css/scanner.css">
 </head>
 <body>
-
     <div class="container">
         <header class="main-header">
             <img src="media/FutCam.png" alt="FutCam Logo" />
@@ -17,34 +17,109 @@
         </header>
 
         <div class="top-menu">
-            <div class="menu-icon" title="Escáner" onclick="window.location.href='scanner.html'"><i class="fa-solid fa-camera"></i></div>
+            <div class="menu-icon active" title="Escáner 3D"><i class="fa-solid fa-camera"></i></div>
             <div class="menu-icon" title="Videos" onclick="window.location.href='main.html'"><i class="fa-solid fa-video"></i></div>
-            <div class="menu-icon active" title="3D" onclick="window.location.href='Modelo.html'"><i class="fa-solid fa-cube"></i></div>
             <div class="menu-icon" title="Estadísticas" onclick="window.location.href='Estadisticas.html'"><i class="fa-solid fa-chart-bar"></i></div>
             <div class="menu-icon" title="Objetivos" onclick="window.location.href='Tareas.html'"><i class="fa-solid fa-bullseye"></i></div>
         </div>
 
-        <div class="content-list">
-            <div class="card" style="align-items:center;">
-                <div class="card-media">
-                    <img src="https://svgshare.com/i/13kA.svg" alt="Paisaje" />
-                </div>
-                <div class="model-arrows">
-                    <button class="filter-btn"><i class="fa-solid fa-arrow-left"></i></button>
-                    <button class="filter-btn"><i class="fa-solid fa-arrow-up"></i></button>
-                    <button class="filter-btn"><i class="fa-solid fa-arrow-down"></i></button>
-                    <button class="filter-btn"><i class="fa-solid fa-arrow-right"></i></button>
-                </div>
-                <div class="model-actions">
-                    <button class="filter-btn">ANIMAR</button>
-                    <button class="filter-btn">Información</button>
-                    <button class="filter-btn">EFECTOS</button>
+        <!-- Pantalla de escaneo inicial -->
+        <div class="scanner-section" id="scannerSection">
+            <div class="scanner-container">
+                <div class="scanner-overlay">
+                    <h2>Escanea tu objeto favorito</h2>
+                    <div class="scan-frame">
+                        <div class="corner top-left"></div>
+                        <div class="corner top-right"></div>
+                        <div class="corner bottom-left"></div>
+                        <div class="corner bottom-right"></div>
+                        <div class="scan-line"></div>
+                    </div>
+                    <button class="scan-button" id="scanButton">
+                        <span>ESCANEAR</span>
+                    </button>
                 </div>
             </div>
         </div>
+
+        <!-- Pantalla de cámara -->
+        <div class="camera-section hidden" id="cameraSection">
+            <div class="camera-container">
+                <div class="camera-view">
+                    <video id="cameraStream" autoplay playsinline></video>
+                    <div class="camera-overlay">
+                        <div class="scan-frame active">
+                            <div class="corner top-left"></div>
+                            <div class="corner top-right"></div>
+                            <div class="corner bottom-left"></div>
+                            <div class="corner bottom-right"></div>
+                            <div class="scan-line scanning"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="camera-controls">
+                    <button class="camera-btn cancel" id="cancelButton">
+                        <i class="fa-solid fa-xmark"></i>
+                        <span>Cancelar</span>
+                    </button>
+                    <button class="camera-btn capture" id="captureButton">
+                        <i class="fa-solid fa-camera"></i>
+                        <span>Capturar</span>
+                    </button>
+                    <button class="camera-btn switch" id="switchButton">
+                        <i class="fa-solid fa-rotate"></i>
+                        <span>Voltear</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Visualizador 3D -->
+        <div class="model-section hidden" id="modelSection">
+            <div class="card" style="align-items:center;">
+                <!-- Canvas 3D -->
+                <div class="model-viewer" id="modelViewer">
+                    <canvas id="threeCanvas"></canvas>
+                    <div class="loading-overlay" id="loadingOverlay">
+                        <div class="loading-spinner"></div>
+                        <p>Procesando imagen...</p>
+                    </div>
+                </div>
+
+                <!-- Controles de rotación -->
+                <div class="model-arrows">
+                    <button class="filter-btn" id="rotateLeft"><i class="fa-solid fa-arrow-left"></i></button>
+                    <button class="filter-btn" id="rotateRight"><i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+
+                <!-- Acciones del modelo -->
+                <div class="model-actions">
+                    <button class="filter-btn" id="animateBtn">ANIMAR</button>
+                    <button class="filter-btn" id="infoBtn">Información</button>
+                    <button class="filter-btn" id="effectsBtn">EFECTOS</button>
+                </div>
+
+                <!-- Panel de información -->
+                <div class="info-panel hidden" id="infoPanel">
+                    <h3 id="infoTitle">Información del Objeto</h3>
+                    <div id="infoContent">
+                        <p>Cargando información...</p>
+                    </div>
+                </div>
+
+                <!-- Botón para volver a escanear -->
+                <button class="scan-again-btn" id="scanAgainBtn">
+                    <i class="fa-solid fa-camera"></i> Escanear de nuevo
+                </button>
+            </div>
+        </div>
+
         <footer class="main-footer">
             Eliud / Joshua
         </footer>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script type="module" src="js/modelo3d.js"></script>
 </body>
 </html>
