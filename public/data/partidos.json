@@ -1,0 +1,141 @@
+{
+  "grupo_mexico": {
+    "titulo": "Partidos en México — Mundial 2026",
+    "sedes": ["Ciudad de México", "Guadalajara", "Monterrey"],
+    "equipos": [
+      { "nombre": "México",      "bandera": "🇲🇽", "color": "#006847" },
+      { "nombre": "Sudáfrica",   "bandera": "🇿🇦", "color": "#007A4D" },
+      { "nombre": "Corea del Sur","bandera": "🇰🇷", "color": "#003478" },
+      { "nombre": "Polonia",     "bandera": "🇵🇱", "color": "#DC143C" },
+      { "nombre": "Ucrania",     "bandera": "🇺🇦", "color": "#005BBB" },
+      { "nombre": "Túnez",       "bandera": "🇹🇳", "color": "#E70013" },
+      { "nombre": "Uzbekistán",  "bandera": "🇺🇿", "color": "#1EB53A" },
+      { "nombre": "Colombia",    "bandera": "🇨🇴", "color": "#FCD116" },
+      { "nombre": "Japón",       "bandera": "🇯🇵", "color": "#BC002D" },
+      { "nombre": "Cabo Verde",  "bandera": "🇨🇻", "color": "#003893" },
+      { "nombre": "Arabia Saudita","bandera": "🇸🇦", "color": "#165E2B" }
+    ],
+    "partidos": [
+      {
+        "id": 1,
+        "fecha": "11 Jun 2026",
+        "hora": "18:00",
+        "sede": "Estadio Azteca, Ciudad de México",
+        "local": { "nombre": "México", "bandera": "🇲🇽", "goles": 2 },
+        "visitante": { "nombre": "Sudáfrica", "bandera": "🇿🇦", "goles": 0 },
+        "estado": "finalizado",
+        "jornada": 1
+      },
+      {
+        "id": 2,
+        "fecha": "12 Jun 2026",
+        "hora": "15:00",
+        "sede": "Estadio Akron, Guadalajara",
+        "local": { "nombre": "Polonia", "bandera": "🇵🇱", "goles": 1 },
+        "visitante": { "nombre": "Corea del Sur", "bandera": "🇰🇷", "goles": 1 },
+        "estado": "finalizado",
+        "jornada": 1
+      },
+      {
+        "id": 3,
+        "fecha": "12 Jun 2026",
+        "hora": "21:00",
+        "sede": "Estadio BBVA, Monterrey",
+        "local": { "nombre": "Colombia", "bandera": "🇨🇴", "goles": 3 },
+        "visitante": { "nombre": "Cabo Verde", "bandera": "🇨🇻", "goles": 1 },
+        "estado": "finalizado",
+        "jornada": 1
+      },
+      {
+        "id": 4,
+        "fecha": "13 Jun 2026",
+        "hora": "18:00",
+        "sede": "Estadio Azteca, Ciudad de México",
+        "local": { "nombre": "Japón", "bandera": "🇯🇵", "goles": 0 },
+        "visitante": { "nombre": "Ucrania", "bandera": "🇺🇦", "goles": 2 },
+        "estado": "finalizado",
+        "jornada": 1
+      },
+      {
+        "id": 5,
+        "fecha": "14 Jun 2026",
+        "hora": "18:00",
+        "sede": "Estadio Akron, Guadalajara",
+        "local": { "nombre": "Túnez", "bandera": "🇹🇳", "goles": 1 },
+        "visitante": { "nombre": "Arabia Saudita", "bandera": "🇸🇦", "goles": 1 },
+        "estado": "finalizado",
+        "jornada": 1
+      },
+      {
+        "id": 6,
+        "fecha": "15 Jun 2026",
+        "hora": "18:00",
+        "sede": "Estadio BBVA, Monterrey",
+        "local": { "nombre": "Uzbekistán", "bandera": "🇺🇿", "goles": 0 },
+        "visitante": { "nombre": "México", "bandera": "🇲🇽", "goles": 1 },
+        "estado": "finalizado",
+        "jornada": 2
+      },
+      {
+        "id": 7,
+        "fecha": "16 Jun 2026",
+        "hora": "15:00",
+        "sede": "Estadio Azteca, Ciudad de México",
+        "local": { "nombre": "Corea del Sur", "bandera": "🇰🇷", "goles": 2 },
+        "visitante": { "nombre": "Sudáfrica", "bandera": "🇿🇦", "goles": 0 },
+        "estado": "finalizado",
+        "jornada": 2
+      },
+      {
+        "id": 8,
+        "fecha": "17 Jun 2026",
+        "hora": "21:00",
+        "sede": "Estadio Akron, Guadalajara",
+        "local": { "nombre": "Polonia", "bandera": "🇵🇱", "goles": null },
+        "visitante": { "nombre": "Colombia", "bandera": "🇨🇴", "goles": null },
+        "estado": "proximo",
+        "jornada": 2
+      },
+      {
+        "id": 9,
+        "fecha": "18 Jun 2026",
+        "hora": "18:00",
+        "sede": "Estadio BBVA, Monterrey",
+        "local": { "nombre": "Ucrania", "bandera": "🇺🇦", "goles": null },
+        "visitante": { "nombre": "Túnez", "bandera": "🇹🇳", "goles": null },
+        "estado": "proximo",
+        "jornada": 2
+      },
+      {
+        "id": 10,
+        "fecha": "19 Jun 2026",
+        "hora": "18:00",
+        "sede": "Estadio Azteca, Ciudad de México",
+        "local": { "nombre": "Arabia Saudita", "bandera": "🇸🇦", "goles": null },
+        "visitante": { "nombre": "Japón", "bandera": "🇯🇵", "goles": null },
+        "estado": "proximo",
+        "jornada": 2
+      },
+      {
+        "id": 11,
+        "fecha": "20 Jun 2026",
+        "hora": "20:00",
+        "sede": "Estadio Akron, Guadalajara",
+        "local": { "nombre": "Cabo Verde", "bandera": "🇨🇻", "goles": null },
+        "visitante": { "nombre": "Uzbekistán", "bandera": "🇺🇿", "goles": null },
+        "estado": "proximo",
+        "jornada": 3
+      },
+      {
+        "id": 12,
+        "fecha": "21 Jun 2026",
+        "hora": "18:00",
+        "sede": "Estadio BBVA, Monterrey",
+        "local": { "nombre": "México", "bandera": "🇲🇽", "goles": null },
+        "visitante": { "nombre": "Polonia", "bandera": "🇵🇱", "goles": null },
+        "estado": "proximo",
+        "jornada": 3
+      }
+    ]
+  }
+}

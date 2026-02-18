@@ -1,0 +1,176 @@
+{
+  "facil": [
+    {
+      "id": 1,
+      "pregunta": "¿En qué país se jugó el primer Mundial de Fútbol?",
+      "opciones": ["Brasil", "Uruguay", "Argentina", "México"],
+      "respuesta": "Uruguay",
+      "dato": "Uruguay 1930 fue el primer Mundial. El anfitrión también ganó el torneo."
+    },
+    {
+      "id": 2,
+      "pregunta": "¿Cuántos países participan en el Mundial 2026?",
+      "opciones": ["32", "48", "36", "64"],
+      "respuesta": "48",
+      "dato": "El Mundial 2026 es el primero en tener 48 selecciones, ampliado desde 32."
+    },
+    {
+      "id": 3,
+      "pregunta": "¿Qué tres países son co-sede del Mundial 2026?",
+      "opciones": ["USA, México, Canadá", "USA, Brasil, México", "Canadá, Colombia, USA", "México, Argentina, USA"],
+      "respuesta": "USA, México, Canadá",
+      "dato": "Es el primer Mundial con tres países anfitriones simultáneamente."
+    },
+    {
+      "id": 4,
+      "pregunta": "¿Quién es el máximo goleador en la historia de los Mundiales?",
+      "opciones": ["Pelé", "Ronaldo (Brasil)", "Miroslav Klose", "Just Fontaine"],
+      "respuesta": "Miroslav Klose",
+      "dato": "Klose marcó 16 goles en Mundiales con Alemania (2002, 2006, 2010, 2014)."
+    },
+    {
+      "id": 5,
+      "pregunta": "¿Cuántas veces ha ganado Brasil el Mundial?",
+      "opciones": ["4", "5", "6", "3"],
+      "respuesta": "5",
+      "dato": "Brasil es el único país en ganar 5 Copas del Mundo (1958, 1962, 1970, 1994, 2002)."
+    },
+    {
+      "id": 6,
+      "pregunta": "¿En qué año ganó México el Mundial?",
+      "opciones": ["1986", "1970", "1994", "México nunca ha ganado"],
+      "respuesta": "México nunca ha ganado",
+      "dato": "México ha llegado máximo a cuartos de final, en 1970 y 1986."
+    },
+    {
+      "id": 7,
+      "pregunta": "¿Qué selección ganó el Mundial 2022 en Qatar?",
+      "opciones": ["Francia", "Brasil", "Argentina", "Alemania"],
+      "respuesta": "Argentina",
+      "dato": "Argentina venció a Francia en penales 4-2 en la final de Qatar 2022."
+    },
+    {
+      "id": 8,
+      "pregunta": "¿Cuántos goles hizo Ronaldo (Brasil) en Mundiales?",
+      "opciones": ["12", "15", "9", "11"],
+      "respuesta": "15",
+      "dato": "Ronaldo Nazário marcó 15 goles en 3 Mundiales, fue récord antes que Klose."
+    }
+  ],
+  "intermedio": [
+    {
+      "id": 9,
+      "pregunta": "¿Quién tiene más participaciones en Copas del Mundo como jugador?",
+      "opciones": ["Lothar Matthäus", "Antonio Carbajal", "Gianluigi Buffon", "Rafael Márquez"],
+      "respuesta": "Antonio Carbajal",
+      "dato": "El portero mexicano Carbajal jugó 5 Mundiales consecutivos (1950–1966)."
+    },
+    {
+      "id": 10,
+      "pregunta": "¿Cuántos goles marcó Just Fontaine en el Mundial 1958?",
+      "opciones": ["11", "13", "10", "9"],
+      "respuesta": "13",
+      "dato": "Fontaine marcó 13 goles en un solo Mundial (Francia 1958), récord absoluto."
+    },
+    {
+      "id": 11,
+      "pregunta": "¿En qué Mundial debutó Lionel Messi?",
+      "opciones": ["Alemania 2006", "Sudáfrica 2010", "Korea-Japón 2002", "Brasil 2014"],
+      "respuesta": "Alemania 2006",
+      "dato": "Messi tenía 18 años cuando jugó su primer partido mundialista en 2006."
+    },
+    {
+      "id": 12,
+      "pregunta": "¿Qué estadio será la sede de la final del Mundial 2026?",
+      "opciones": ["Rose Bowl, Los Angeles", "MetLife Stadium, Nueva York/Nueva Jersey", "Estadio Azteca, Ciudad de México", "BC Place, Vancouver"],
+      "respuesta": "MetLife Stadium, Nueva York/Nueva Jersey",
+      "dato": "El MetLife Stadium tiene capacidad para más de 82,000 espectadores."
+    },
+    {
+      "id": 13,
+      "pregunta": "¿Cuántos Mundiales ha ganado Alemania?",
+      "opciones": ["3", "4", "5", "2"],
+      "respuesta": "4",
+      "dato": "Alemania ganó en 1954, 1974, 1990 y 2014. En 1954 fue considerada la 'hazaña de Berna'."
+    },
+    {
+      "id": 14,
+      "pregunta": "¿Qué jugador ganó el Balón de Oro en el Mundial 2022?",
+      "opciones": ["Kylian Mbappé", "Lionel Messi", "Luka Modrić", "Emiliano Martínez"],
+      "respuesta": "Lionel Messi",
+      "dato": "Messi ganó también el Balón de Oro en el Mundial 2014, siendo el único en ganar dos."
+    },
+    {
+      "id": 15,
+      "pregunta": "¿Quién fue el goleador del Mundial 2018 en Rusia?",
+      "opciones": ["Cristiano Ronaldo", "Harry Kane", "Antoine Griezmann", "Romelu Lukaku"],
+      "respuesta": "Harry Kane",
+      "dato": "Kane marcó 6 goles con Inglaterra y ganó la Bota de Oro de Rusia 2018."
+    },
+    {
+      "id": 16,
+      "pregunta": "¿Cuántos partidos se jugarán en el Mundial 2026?",
+      "opciones": ["64", "80", "104", "96"],
+      "respuesta": "104",
+      "dato": "Con 48 equipos el torneo tiene 104 partidos, 40 más que el formato anterior de 64."
+    }
+  ],
+  "dificil": [
+    {
+      "id": 17,
+      "pregunta": "¿En qué año fue la única vez que el Mundial se jugó en dos países simultáneamente antes del 2026?",
+      "opciones": ["1998", "2002", "2006", "Nunca antes del 2026"],
+      "respuesta": "2002",
+      "dato": "Korea 2002 fue el único Mundial co-organizado por dos países (Corea del Sur y Japón)."
+    },
+    {
+      "id": 18,
+      "pregunta": "¿Cuántos goles tiene Cristiano Ronaldo en Copas del Mundo?",
+      "opciones": ["7", "9", "8", "6"],
+      "respuesta": "8",
+      "dato": "Ronaldo marcó 8 goles en 5 Mundiales (2006, 2010, 2014, 2018, 2022), incluido el hat-trick vs España en 2018."
+    },
+    {
+      "id": 19,
+      "pregunta": "¿Qué selección fue eliminada en primera ronda siendo campeona vigente en 2010?",
+      "opciones": ["Brasil", "Francia", "Italia", "Alemania"],
+      "respuesta": "Italia",
+      "dato": "Italia, campeona de 2006, quedó eliminada en el Grupo F de Sudáfrica 2010 con solo 2 puntos."
+    },
+    {
+      "id": 20,
+      "pregunta": "¿Cuál es el resultado más abultado en la historia de los Mundiales?",
+      "opciones": ["Hungría 10-1 El Salvador (1982)", "Hungría 9-0 Corea del Sur (1954)", "Yugoslavia 9-0 Zaire (1974)", "Alemania 8-0 Arabia Saudita (2002)"],
+      "respuesta": "Hungría 10-1 El Salvador (1982)",
+      "dato": "Hungría goleó 10-1 a El Salvador en el Mundial de España 1982, récord histórico."
+    },
+    {
+      "id": 21,
+      "pregunta": "¿Cuántos goles tiene Rafael Márquez en Mundiales con México?",
+      "opciones": ["4", "3", "2", "5"],
+      "respuesta": "4",
+      "dato": "Márquez es el único capitán mexicano en anotar en 4 Mundiales distintos."
+    },
+    {
+      "id": 22,
+      "pregunta": "¿En qué año México alcanzó el partido de Quinto lugar en un Mundial?",
+      "opciones": ["1970", "1986", "México nunca jugó ese partido", "1978"],
+      "respuesta": "México nunca jugó ese partido",
+      "dato": "México llegó máximo a cuartos de final. El partido de 5to lugar existió hasta 1978."
+    },
+    {
+      "id": 23,
+      "pregunta": "¿Qué portero tiene más partidos sin recibir gol en la historia de los Mundiales?",
+      "opciones": ["Gianluigi Buffon", "Peter Shilton", "Sepp Maier", "Walter Zenga"],
+      "respuesta": "Peter Shilton",
+      "dato": "Shilton tuvo 10 partidos sin goles en Mundiales jugando para Inglaterra entre 1982 y 1990."
+    },
+    {
+      "id": 24,
+      "pregunta": "¿Cuántos jugadores fueron expulsados en el partido de la 'Batalla de Nuremberg' (2006)?",
+      "opciones": ["2", "3", "4", "1"],
+      "respuesta": "4",
+      "dato": "Portugal vs Holanda en 2006 terminó con 4 expulsados y 16 tarjetas amarillas; fue el partido más violento de la historia."
+    }
+  ]
+}

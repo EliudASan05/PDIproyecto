@@ -6,8 +6,7 @@
     <title>FutCam - Estadísticas</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/Estadisticas.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="css/estadisticas.css">
 </head>
 <body>
     <div class="container">
@@ -15,50 +14,45 @@
             <img src="media/FutCam.png" alt="FutCam Logo" />
             <h1 class="site-title">FutCam</h1>
         </header>
+
         <div class="top-menu">
             <div class="menu-icon" title="Escáner" onclick="window.location.href='scanner.html'"><i class="fa-solid fa-camera"></i></div>
             <div class="menu-icon" title="Videos" onclick="window.location.href='main.html'"><i class="fa-solid fa-video"></i></div>
             <div class="menu-icon" title="Información" onclick="window.location.href='Modelo.html'"><i class="fa-solid fa-cube"></i></div>
-            <div class="menu-icon active" title="Estadísticas" onclick="window.location.href='Estadisticas.html'"><i class="fa-solid fa-chart-bar"></i></div>
+            <div class="menu-icon active" title="Estadísticas"><i class="fa-solid fa-chart-bar"></i></div>
             <div class="menu-icon" title="Objetivos" onclick="window.location.href='Tareas.html'"><i class="fa-solid fa-bullseye"></i></div>
         </div>
-        <div class="content-list">
-            <div class="card estadisticas-card">
-                <h2 class="estadisticas-title">Estadísticas</h2>
-                <canvas id="statsChart" width="260" height="260"></canvas>
+
+        <div class="matches-container">
+            <!-- Header en vivo -->
+            <div class="live-header">
+                <h2>Partidos recientes</h2>
+               <!-- <div class="live-badge">
+                    <div class="live-dot"></div>
+                    EN VIVO
+                </div>
+                -->
             </div>
-            <div class="card estadisticas-card">
-                <img src="https://svgshare.com/i/13kA.svg" alt="Paisaje" class="estadisticas-img" />
+
+            <!-- Texto de actualización simulada -->
+            <p class="update-timer">Actualizado hace <span id="updateTime">0</span> seg</p>
+
+            <!-- Filtros de jornada -->
+            <div class="jornada-filters">
+                <button class="jornada-btn active" onclick="filtrarJornada(0, this)">Todos</button>
+                <button class="jornada-btn" onclick="filtrarJornada(1, this)">J1</button>
+                <button class="jornada-btn" onclick="filtrarJornada(2, this)">J2</button>
+                <button class="jornada-btn" onclick="filtrarJornada(3, this)">J3</button>
             </div>
+
+            <!-- Tarjetas generadas por JS -->
+            <div id="matchesContainer"></div>
         </div>
+
         <footer class="main-footer">
             Eliud / Joshua
         </footer>
     </div>
-    <script>
-    const ctx = document.getElementById('statsChart').getContext('2d');
-    new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-            labels: ['12.5%', '25%', '62.5%'],
-            datasets: [{
-                data: [12.5, 25, 62.5],
-                backgroundColor: [
-                    '#3ec6e0',
-                    '#1dcbe6',
-                    '#6ee6fa'
-                ],
-                borderWidth: 0
-            }]
-        },
-        options: {
-            cutout: '60%',
-            plugins: {
-                legend: { display: false },
-                tooltip: { enabled: false }
-            }
-        }
-    });
-    </script>
+    <script src="js/estadisticas.js"></script>
 </body>
 </html>

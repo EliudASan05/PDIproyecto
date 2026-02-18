@@ -1,5 +1,7 @@
 /* === Estadisticas.css === */
 
+/*
+
 .estadisticas-title {
     color: #fff;
     margin-bottom: 10px;
@@ -43,3 +45,217 @@
         height: auto;
     }
 }
+
+*/
+
+.live-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 18px;
+            padding: 0 4px;
+        }
+        .live-header h2 {
+            color: #fff;
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin: 0;
+        }
+        .live-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 40, 40, 0.15);
+            border: 1.5px solid #ff2828;
+            border-radius: 20px;
+            padding: 4px 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #ff5555;
+            letter-spacing: 1px;
+        }
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: #ff2828;
+            border-radius: 50%;
+            animation: blink 1.2s infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.2; }
+        }
+
+        /* ── Filtros de jornada ── */
+        .jornada-filters {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+        .jornada-btn {
+            padding: 8px 20px;
+            border-radius: 20px;
+            border: 1.5px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.07);
+            color: #ccc;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s;
+        }
+        .jornada-btn.active, .jornada-btn:hover {
+            background: rgba(0, 212, 255, 0.18);
+            border-color: #00d4ff;
+            color: #00d4ff;
+        }
+
+        /* ── Tarjeta de partido ── */
+        .match-card {
+            background: rgba(20, 20, 35, 0.88);
+            border: 1.5px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            padding: 18px 20px;
+            margin-bottom: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .match-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(0,0,0,0.4);
+        }
+        .match-card.finalizado {
+            border-left: 4px solid #555;
+        }
+        .match-card.en-vivo {
+            border-left: 4px solid #ff2828;
+            box-shadow: 0 0 20px rgba(255,40,40,0.15);
+        }
+        .match-card.proximo {
+            border-left: 4px solid #00d4ff;
+        }
+
+        /* Info superior de la tarjeta */
+        .match-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.72rem;
+            color: #888;
+        }
+        .match-meta .sede {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .match-meta .estado-badge {
+            font-weight: 700;
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            letter-spacing: 0.5px;
+        }
+        .estado-badge.finalizado { background: rgba(120,120,120,0.2); color: #aaa; }
+        .estado-badge.en-vivo   { background: rgba(255,40,40,0.2);   color: #ff5555; }
+        .estado-badge.proximo   { background: rgba(0,212,255,0.15);  color: #00d4ff; }
+
+        /* Marcador central */
+        .match-score {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        .team {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            flex: 1;
+        }
+        .team-flag {
+            font-size: 2.4rem;
+            line-height: 1;
+        }
+        .team-name {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: #ddd;
+            text-align: center;
+        }
+        .score-box {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+        .score-num {
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: #fff;
+            min-width: 36px;
+            text-align: center;
+            line-height: 1;
+        }
+        .score-sep {
+            font-size: 1.8rem;
+            color: #555;
+            font-weight: 300;
+        }
+        .score-pending {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #00d4ff;
+            letter-spacing: 2px;
+        }
+
+        /* Hora del partido */
+        .match-time {
+            text-align: center;
+            font-size: 0.78rem;
+            color: #888;
+        }
+        .match-time span {
+            color: #00d4ff;
+            font-weight: 600;
+        }
+
+        /* Contenedor de tarjetas */
+        .matches-container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding-bottom: 20px;
+        }
+
+        /* Separador de jornada */
+        .jornada-label {
+            text-align: center;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: #00d4ff;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin: 20px 0 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .jornada-label::before,
+        .jornada-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(0,212,255,0.25);
+        }
+
+        /* Contador de actualización */
+        .update-timer {
+            text-align: center;
+            font-size: 0.72rem;
+            color: #555;
+            margin-top: -10px;
+            margin-bottom: 16px;
+        }
+        .update-timer span { color: #888; }
