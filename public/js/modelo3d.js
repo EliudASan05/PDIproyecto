@@ -21,6 +21,7 @@ const scanAgainBtn = document.getElementById('scanAgainBtn');
 const scannerSection = document.getElementById('scannerSection');
 const cameraSection = document.getElementById('cameraSection');
 const modelSection = document.getElementById('modelSection');
+const topMenu = document.getElementById('topMenu');
 
 const cameraStream = document.getElementById('cameraStream');
 const loadingOverlay = document.getElementById('loadingOverlay');
@@ -34,6 +35,18 @@ const rotateRightBtn = document.getElementById('rotateRight');
 const animateBtn = document.getElementById('animateBtn');
 const infoBtn = document.getElementById('infoBtn');
 const effectsBtn = document.getElementById('effectsBtn');
+
+// ===============================================
+// MANEJO DEL MENÚ DINÁMICO
+// ===============================================
+
+/**
+ * Actualiza el atributo data-active del menú según
+ * qué sección está visible: 'scanner' o 'modelo'
+ */
+function setMenuActive(section) {
+    topMenu.setAttribute('data-active', section);
+}
 
 // Base de datos de objetos detectables
 const objectDatabase = {
@@ -87,17 +100,17 @@ const objectDatabase = {
 
 document.addEventListener('DOMContentLoaded', () => {
     setupEventListeners();
+    // Estado inicial: escáner activo
+    setMenuActive('scanner');
 });
 
 function setupEventListeners() {
-    // Eventos del escáner
     scanButton.addEventListener('click', openCamera);
     cancelButton.addEventListener('click', cancelScanning);
     captureButton.addEventListener('click', captureAndProcess);
     switchButton.addEventListener('click', switchCamera);
     scanAgainBtn.addEventListener('click', resetToScanner);
-    
-    // Eventos del modelo 3D
+
     rotateLeftBtn.addEventListener('click', () => rotateModel(-1));
     rotateRightBtn.addEventListener('click', () => rotateModel(1));
     animateBtn.addEventListener('click', toggleAnimation);
@@ -123,10 +136,12 @@ async function openCamera() {
             },
             audio: false
         });
-        
+
         cameraStream.srcObject = stream;
         scannerSection.classList.add('hidden');
         cameraSection.classList.remove('hidden');
+        // Cámara abierta → sigue siendo "scanner"
+        setMenuActive('scanner');
     } catch (error) {
         console.error('Error al acceder a la cámara:', error);
         alert('No se pudo acceder a la cámara. Verifica los permisos.');
@@ -137,6 +152,7 @@ function cancelScanning() {
     closeCamera();
     cameraSection.classList.add('hidden');
     scannerSection.classList.remove('hidden');
+    setMenuActive('scanner');
 }
 
 async function switchCamera() {
@@ -153,24 +169,23 @@ function closeCamera() {
 }
 
 async function captureAndProcess() {
-    // Capturar imagen
     const canvas = document.createElement('canvas');
     const video = cameraStream;
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
     const context = canvas.getContext('2d');
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
-    
-    // Cerrar cámara y mostrar loading
+
     closeCamera();
     cameraSection.classList.add('hidden');
     modelSection.classList.remove('hidden');
     loadingOverlay.classList.remove('hidden');
-    
-    // Simular análisis de imagen
+
+    // Al mostrar el modelo → pestaña "modelo" activa
+    setMenuActive('modelo');
+
     const detectedObject = await analyzeImage(canvas);
-    
-    // Inicializar escena 3D
+
     setTimeout(() => {
         initThreeJS();
         create3DModel(detectedObject);
@@ -180,53 +195,36 @@ async function captureAndProcess() {
 }
 
 async function analyzeImage(canvas) {
-    // Detección por color dominante
     return new Promise((resolve) => {
         setTimeout(() => {
             const ctx = canvas.getContext('2d');
             const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
             const data = imageData.data;
-            
+
             let r = 0, g = 0, b = 0;
             const pixelCount = data.length / 4;
-            
-            // Calcular color promedio
+
             for (let i = 0; i < data.length; i += 4) {
                 r += data[i];
                 g += data[i + 1];
                 b += data[i + 2];
             }
-            
+
             r = Math.floor(r / pixelCount);
             g = Math.floor(g / pixelCount);
             b = Math.floor(b / pixelCount);
-            
+
             console.log(`🎨 Color detectado - R:${r} G:${g} B:${b}`);
-            
-            // Detección por color dominante
-            // Verde dominante → Bandera de México (águila)
+
             if (g > r && g > b && g > 90) {
-                console.log('✅ Detectado: Bandera de México (verde dominante)');
                 resolve('bandera_mexico');
-            }
-            // Rojo dominante → También México (franja roja de la bandera)
-            else if (r > g && r > b && r > 110 && g < 100) {
-                console.log('✅ Detectado: Bandera de México (rojo dominante)');
+            } else if (r > g && r > b && r > 110 && g < 100) {
                 resolve('bandera_mexico');
-            }
-            // Blanco/Gris claro → Balón de fútbol
-            else if (Math.abs(r - g) < 30 && Math.abs(g - b) < 30 && r > 150) {
-                console.log('⚽ Detectado: Balón de fútbol (blanco/gris claro)');
+            } else if (Math.abs(r - g) < 30 && Math.abs(g - b) < 30 && r > 150) {
                 resolve('futbol');
-            }
-            // Negro/Gris oscuro → Balón de fútbol
-            else if (r < 80 && g < 80 && b < 80) {
-                console.log('⚽ Detectado: Balón de fútbol (negro/gris oscuro)');
+            } else if (r < 80 && g < 80 && b < 80) {
                 resolve('futbol');
-            }
-            // Otros colores → Objeto genérico
-            else {
-                console.log('📦 Detectado: Objeto genérico (color no específico)');
+            } else {
                 resolve('default');
             }
         }, 1000);
@@ -240,23 +238,16 @@ async function analyzeImage(canvas) {
 function initThreeJS() {
     const canvas = document.getElementById('threeCanvas');
     const container = document.getElementById('modelViewer');
-    
-    // Limpiar escena anterior si existe
+
     if (renderer) {
         renderer.dispose();
-        if (currentModel) {
-            scene.remove(currentModel);
-        }
-        if (particleSystem) {
-            scene.remove(particleSystem);
-        }
+        if (currentModel) scene.remove(currentModel);
+        if (particleSystem) scene.remove(particleSystem);
     }
-    
-    // Configurar escena
+
     scene = new THREE.Scene();
     scene.background = new THREE.Color(0x0a0a0f);
-    
-    // Configurar cámara
+
     camera = new THREE.PerspectiveCamera(
         75,
         container.clientWidth / container.clientHeight,
@@ -264,40 +255,34 @@ function initThreeJS() {
         1000
     );
     camera.position.z = 5;
-    
-    // Configurar renderer
+
     renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
     renderer.setSize(container.clientWidth, container.clientHeight);
     renderer.setPixelRatio(window.devicePixelRatio);
-    
-    // Iluminación
+
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
     scene.add(ambientLight);
-    
+
     const pointLight = new THREE.PointLight(0xffffff, 1);
     pointLight.position.set(5, 5, 5);
     scene.add(pointLight);
-    
+
     const pointLight2 = new THREE.PointLight(0x00d4ff, 0.5);
     pointLight2.position.set(-5, -5, 5);
     scene.add(pointLight2);
-    
-    // Responsive
+
     window.addEventListener('resize', onWindowResize);
 }
 
 function create3DModel(objectType) {
     const objData = objectDatabase[objectType] || objectDatabase['default'];
-    
     let geometry, material;
-    
-    switch(objData.model) {
+
+    switch (objData.model) {
         case 'eagle':
-            // Crear águila estilizada
             currentModel = createEagle(objData.color);
             break;
         case 'ball':
-            // Crear balón
             geometry = new THREE.SphereGeometry(1.5, 32, 32);
             material = new THREE.MeshPhongMaterial({
                 color: objData.color,
@@ -308,7 +293,6 @@ function create3DModel(objectType) {
             addSoccerPattern(currentModel);
             break;
         default:
-            // Crear cubo genérico
             geometry = new THREE.BoxGeometry(2, 2, 2);
             material = new THREE.MeshPhongMaterial({
                 color: objData.color,
@@ -316,71 +300,64 @@ function create3DModel(objectType) {
             });
             currentModel = new THREE.Mesh(geometry, material);
     }
-    
+
     scene.add(currentModel);
     animate();
 }
 
 function createEagle(color) {
     const group = new THREE.Group();
-    
-    // Cuerpo
+
     const bodyGeometry = new THREE.SphereGeometry(0.8, 32, 32);
     const bodyMaterial = new THREE.MeshPhongMaterial({ color: 0x4a3520 });
     const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
     body.scale.set(1, 1.2, 0.8);
     group.add(body);
-    
-    // Cabeza
+
     const headGeometry = new THREE.SphereGeometry(0.5, 32, 32);
     const headMaterial = new THREE.MeshPhongMaterial({ color: 0xffffff });
     const head = new THREE.Mesh(headGeometry, headMaterial);
     head.position.y = 1.2;
     group.add(head);
-    
-    // Pico
+
     const beakGeometry = new THREE.ConeGeometry(0.2, 0.4, 8);
     const beakMaterial = new THREE.MeshPhongMaterial({ color: 0xffa500 });
     const beak = new THREE.Mesh(beakGeometry, beakMaterial);
     beak.position.set(0, 1.2, 0.5);
     beak.rotation.x = Math.PI / 2;
     group.add(beak);
-    
-    // Alas (simplificadas)
+
     const wingGeometry = new THREE.BoxGeometry(2, 0.1, 1);
     const wingMaterial = new THREE.MeshPhongMaterial({ color: color });
-    
+
     const leftWing = new THREE.Mesh(wingGeometry, wingMaterial);
     leftWing.position.set(-1.2, 0, 0);
     leftWing.rotation.z = -Math.PI / 6;
     group.add(leftWing);
-    
+
     const rightWing = new THREE.Mesh(wingGeometry, wingMaterial);
     rightWing.position.set(1.2, 0, 0);
     rightWing.rotation.z = Math.PI / 6;
     group.add(rightWing);
-    
-    // Cola
+
     const tailGeometry = new THREE.ConeGeometry(0.5, 1, 8);
     const tailMaterial = new THREE.MeshPhongMaterial({ color: 0x4a3520 });
     const tail = new THREE.Mesh(tailGeometry, tailMaterial);
     tail.position.set(0, -0.5, -0.8);
     tail.rotation.x = Math.PI / 2;
     group.add(tail);
-    
+
     return group;
 }
 
 function addSoccerPattern(ball) {
-    // Añadir patrón de pentágonos negros
     const pentagonGeometry = new THREE.CircleGeometry(0.3, 5);
     const pentagonMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
-    
+
     for (let i = 0; i < 12; i++) {
         const pentagon = new THREE.Mesh(pentagonGeometry, pentagonMaterial);
         const phi = Math.acos(-1 + (2 * i) / 12);
         const theta = Math.sqrt(12 * Math.PI) * phi;
-        
         pentagon.position.setFromSphericalCoords(1.51, phi, theta);
         pentagon.lookAt(0, 0, 0);
         ball.add(pentagon);
@@ -389,19 +366,15 @@ function addSoccerPattern(ball) {
 
 function animate() {
     animationId = requestAnimationFrame(animate);
-    
-    if (currentModel) {
-        // Rotación automática suave
-        if (!isAnimating) {
-            currentModel.rotation.y += 0.005;
-        }
+
+    if (currentModel && !isAnimating) {
+        currentModel.rotation.y += 0.005;
     }
-    
-    // Animar partículas si están activas
+
     if (particleSystem && effectsActive) {
         particleSystem.rotation.y += 0.01;
     }
-    
+
     renderer.render(scene, camera);
 }
 
@@ -424,7 +397,6 @@ function rotateModel(direction) {
 
 function toggleAnimation() {
     isAnimating = !isAnimating;
-    
     if (isAnimating) {
         animateBtn.classList.add('active');
         performAnimation();
@@ -435,15 +407,10 @@ function toggleAnimation() {
 
 function performAnimation() {
     if (!currentModel || !isAnimating) return;
-    
-    const startY = currentModel.position.y;
     const time = Date.now() * 0.003;
-    
-    // Animación de "baile" - movimiento ondulatorio
-    currentModel.position.y = startY + Math.sin(time) * 0.3;
+    currentModel.position.y = Math.sin(time) * 0.3;
     currentModel.rotation.x = Math.sin(time * 0.5) * 0.1;
     currentModel.rotation.z = Math.cos(time * 0.5) * 0.1;
-    
     setTimeout(() => performAnimation(), 16);
 }
 
@@ -454,7 +421,6 @@ function toggleInfo() {
 
 function toggleEffects() {
     effectsActive = !effectsActive;
-    
     if (effectsActive) {
         effectsBtn.classList.add('active');
         createParticleSystem();
@@ -468,20 +434,16 @@ function createParticleSystem() {
     const particlesGeometry = new THREE.BufferGeometry();
     const particleCount = 1000;
     const positions = new Float32Array(particleCount * 3);
-    
     for (let i = 0; i < particleCount * 3; i++) {
         positions[i] = (Math.random() - 0.5) * 10;
     }
-    
     particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    
     const particlesMaterial = new THREE.PointsMaterial({
         color: 0x00d4ff,
         size: 0.05,
         transparent: true,
         opacity: 0.8
     });
-    
     particleSystem = new THREE.Points(particlesGeometry, particlesMaterial);
     scene.add(particleSystem);
 }
@@ -502,37 +464,30 @@ function updateInfoPanel(objectType) {
 }
 
 function resetToScanner() {
-    // Limpiar escena
-    if (animationId) {
-        cancelAnimationFrame(animationId);
-    }
-    
+    if (animationId) cancelAnimationFrame(animationId);
+
     if (currentModel) {
         scene.remove(currentModel);
         currentModel = null;
     }
-    
-    if (particleSystem) {
-        removeParticleSystem();
-    }
-    
-    // Resetear estados
+
+    if (particleSystem) removeParticleSystem();
+
     isAnimating = false;
     effectsActive = false;
     animateBtn.classList.remove('active');
     effectsBtn.classList.remove('active');
     infoPanel.classList.add('hidden');
     infoBtn.classList.remove('active');
-    
-    // Volver al escáner
+
     modelSection.classList.add('hidden');
     scannerSection.classList.remove('hidden');
+
+    // Volver al escáner → pestaña cámara activa
+    setMenuActive('scanner');
 }
 
-// Limpiar al cerrar la página
 window.addEventListener('beforeunload', () => {
     closeCamera();
-    if (renderer) {
-        renderer.dispose();
-    }
+    if (renderer) renderer.dispose();
 });

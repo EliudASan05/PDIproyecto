@@ -16,9 +16,11 @@
             <h1 class="site-title">FutCam</h1>
         </header>
 
-        <div class="top-menu">
-            <div class="menu-icon active" title="Escáner 3D"><i class="fa-solid fa-camera"></i></div>
+        <!-- data-active se actualiza por JS según la sección visible -->
+        <div class="top-menu" id="topMenu" data-active="scanner">
+            <div class="menu-icon" data-section="scanner" title="Escáner 3D"><i class="fa-solid fa-camera"></i></div>
             <div class="menu-icon" title="Videos" onclick="window.location.href='main.html'"><i class="fa-solid fa-video"></i></div>
+            <div class="menu-icon" data-section="modelo" title="Modelo 3D"><i class="fa-solid fa-cube"></i></div>
             <div class="menu-icon" title="Estadísticas" onclick="window.location.href='Estadisticas.html'"><i class="fa-solid fa-chart-bar"></i></div>
             <div class="menu-icon" title="Objetivos" onclick="window.location.href='Tareas.html'"><i class="fa-solid fa-bullseye"></i></div>
         </div>
@@ -76,7 +78,7 @@
 
         <!-- Visualizador 3D -->
         <div class="model-section hidden" id="modelSection">
-            <div class="card" style="align-items:center;">
+            <div class="card">
                 <!-- Canvas 3D -->
                 <div class="model-viewer" id="modelViewer">
                     <canvas id="threeCanvas"></canvas>
