@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FutCam - Tareas</title>
+    <title>FutCam - Quiz</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/Tareas.css">
+
 </head>
 <body>
     <div class="container">
@@ -19,17 +20,101 @@
             <div class="menu-icon" title="Videos" onclick="window.location.href='main.html'"><i class="fa-solid fa-video"></i></div>
             <div class="menu-icon" title="Información" onclick="window.location.href='Modelo.html'"><i class="fa-solid fa-cube"></i></div>
             <div class="menu-icon" title="Estadísticas" onclick="window.location.href='Estadisticas.html'"><i class="fa-solid fa-chart-bar"></i></div>
-            <div class="menu-icon active" title="Tareas" onclick="window.location.href='Tareas.html'"><i class="fa-solid fa-bullseye"></i></div>
+            <div class="menu-icon active" title="Tareas"><i class="fa-solid fa-bullseye"></i></div>
         </div>
+
         <div class="quiz-title">QUIZ</div>
+        <p style="text-align:center; color:#888; font-size:0.85rem; margin-top:-10px; margin-bottom:22px;">Elige una dificultad para comenzar</p>
+
         <div class="quiz-difficulty">
-            <div class="difficulty-card difficulty-easy">FÁCIL</div>
-            <div class="difficulty-card difficulty-medium">INTERMEDIO</div>
-            <div class="difficulty-card difficulty-hard">DIFÍCIL</div>
+            <div class="difficulty-card difficulty-easy" onclick="iniciarQuiz('facil')">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:12px;">
+                    <i class="fa-solid fa-star" style="font-size:2rem;color:#fff;"></i>
+                    <span>FÁCIL</span>
+                    <span style="font-size:0.7rem;opacity:0.8;">8 preguntas</span>
+                </div>
+            </div>
+            <div class="difficulty-card difficulty-medium" onclick="iniciarQuiz('intermedio')">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:12px;">
+                    <i class="fa-solid fa-star-half-stroke" style="font-size:2rem;color:#222;"></i>
+                    <span>INTER&shy;MEDIO</span>
+                    <span style="font-size:0.7rem;opacity:0.7;">8 preguntas</span>
+                </div>
+            </div>
+            <div class="difficulty-card difficulty-hard" onclick="iniciarQuiz('dificil')">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:12px;">
+                    <i class="fa-solid fa-skull" style="font-size:2rem;color:#fff;"></i>
+                    <span>DIFÍCIL</span>
+                    <span style="font-size:0.7rem;opacity:0.8;">8 preguntas</span>
+                </div>
+            </div>
         </div>
-        <footer class="main-footer">
-            Eliud / Joshua
-        </footer>
+
+        <footer class="main-footer">Eliud / Joshua</footer>
     </div>
+
+    <!-- ── Quiz Overlay ── -->
+    <div class="quiz-overlay" id="quizOverlay">
+        <!-- Header -->
+        <div class="quiz-header">
+            <div class="quiz-info">
+                <span class="quiz-diff-badge" id="diffBadge">FÁCIL</span>
+                <span class="quiz-progress-text" id="progressText">1 / 8</span>
+            </div>
+            <button class="quiz-close" onclick="cerrarQuiz()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <!-- Barra de progreso -->
+        <div class="progress-bar-wrap">
+            <div class="progress-bar-fill" id="progressBar" style="width:0%"></div>
+        </div>
+
+        <!-- Pregunta -->
+        <div class="question-card" id="questionCard">
+            <div class="question-num" id="questionNum">PREGUNTA 1</div>
+            <div class="question-text" id="questionText">...</div>
+            <div class="options-grid" id="optionsGrid"></div>
+            <div class="dato-box" id="datoBox">
+                <i class="fa-solid fa-lightbulb"></i>
+                <p id="datoText"></p>
+            </div>
+        </div>
+
+        <button class="btn-siguiente" id="btnSiguiente" onclick="siguientePregunta()">
+            Siguiente <i class="fa-solid fa-arrow-right"></i>
+        </button>
+
+        <!-- Pantalla de resultados -->
+        <div class="result-screen" id="resultScreen">
+            <div class="result-emoji" id="resultEmoji">🏆</div>
+            <div class="result-title" id="resultTitle">¡Excelente!</div>
+            <div class="result-score" id="resultScore">8 / 8</div>
+            <div class="result-subtitle" id="resultSubtitle">Puntuación perfecta</div>
+
+            <div class="result-breakdown">
+                <div class="breakdown-item">
+                    <div class="breakdown-num green" id="correctCount">0</div>
+                    <div class="breakdown-label">Correctas</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-num red" id="wrongCount">0</div>
+                    <div class="breakdown-label">Incorrectas</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-num" style="color:#00d4ff" id="pctCount">0%</div>
+                    <div class="breakdown-label">Precisión</div>
+                </div>
+            </div>
+
+            <button class="btn-replay" onclick="repetirQuiz()">
+                <i class="fa-solid fa-rotate-right"></i> Jugar de nuevo
+            </button>
+            <button class="btn-home" onclick="cerrarQuiz()">
+                <i class="fa-solid fa-house"></i> Volver al inicio
+            </button>
+        </div>
+    </div>
+
+    <script src="js/Tareas.js"></script>
 </body>
 </html>
