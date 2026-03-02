@@ -2,36 +2,35 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FutCam 1.0 - Escáner</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#0a0528">
+    <title>FutCam - Escáner</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/scanner.css">
 </head>
 <body>
-      <div class="container">
+    <div class="container">
         <header class="main-header">
             <img src="media/FutCam.png" alt="FutCam Logo" />
             <h1 class="site-title">FutCam</h1>
         </header>
 
         <div class="top-menu">
-            <div class="menu-icon active" title="Escáner">
-                <i class="fa-solid fa-camera"></i>
-            </div>
-            <div class="menu-icon" title="Videos" onclick="window.location.href='main.html'">
-                <i class="fa-solid fa-video"></i>
-            </div>
-            <div class="menu-icon" title="3D" onclick="window.location.href='Modelo.html'">
-                <i class="fa-solid fa-cube"></i>
-            </div>
-            <div class="menu-icon" title="Estadísticas" onclick="window.location.href='Estadisticas.html'">
-                <i class="fa-solid fa-chart-bar"></i>
-            </div>
-            <div class="menu-icon" title="Objetivos" onclick="window.location.href='Tareas.html'">
-                <i class="fa-solid fa-bullseye"></i>
-            </div>
+            <div class="menu-icon active" title="Escáner"><i class="fa-solid fa-camera"></i></div>
+            <div class="menu-icon" title="Videos"       onclick="window.location.href='main.html'"><i class="fa-solid fa-video"></i></div>
+            <div class="menu-icon" title="3D"           onclick="window.location.href='Modelo.html'"><i class="fa-solid fa-cube"></i></div>
+            <div class="menu-icon" title="Estadísticas" onclick="window.location.href='Estadisticas.html'"><i class="fa-solid fa-chart-bar"></i></div>
+            <div class="menu-icon" title="Objetivos"    onclick="window.location.href='Tareas.html'"><i class="fa-solid fa-bullseye"></i></div>
         </div>
+
+        <!-- ── Botón Tutorial ── -->
+        <button class="tutorial-btn pulse" id="tutorialBtn" onclick="openTutorial()">
+            <i class="fa-solid fa-circle-question"></i>
+            ¿Cómo usar el escáner?
+        </button>
 
         <!-- Pantalla de escaneo -->
         <div class="scanner-section" id="scannerSection">
@@ -45,9 +44,7 @@
                         <div class="corner bottom-right"></div>
                         <div class="scan-line"></div>
                     </div>
-                    <button class="scan-button" id="scanButton">
-                        <span>ESCANEAR</span>
-                    </button>
+                    <button class="scan-button" id="scanButton"><span>ESCANEAR</span></button>
                 </div>
             </div>
         </div>
@@ -69,41 +66,118 @@
                 </div>
                 <div class="camera-controls">
                     <button class="camera-btn cancel" id="cancelButton">
-                        <i class="fa-solid fa-xmark"></i>
-                        <span>Cancelar</span>
+                        <i class="fa-solid fa-xmark"></i><span>Cancelar</span>
                     </button>
                     <button class="camera-btn capture" id="captureButton">
-                        <i class="fa-solid fa-camera"></i>
-                        <span>Capturar</span>
+                        <i class="fa-solid fa-camera"></i><span>Capturar</span>
                     </button>
                     <button class="camera-btn switch" id="switchButton">
-                        <i class="fa-solid fa-rotate"></i>
-                        <span>Voltear</span>
+                        <i class="fa-solid fa-rotate"></i><span>Voltear</span>
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- Resultado del escaneo -->
+        <!-- Resultado -->
         <div class="result-section hidden" id="resultSection">
             <div class="result-container">
                 <h2>¡Escaneo completado! ✓</h2>
                 <canvas id="capturedImage"></canvas>
                 <div class="result-buttons">
                     <button class="result-btn save">
-                        <i class="fa-solid fa-download"></i>
-                        Guardar
+                        <i class="fa-solid fa-download"></i> Guardar
                     </button>
                     <button class="result-btn retry" id="retryButton">
-                        <i class="fa-solid fa-redo"></i>
-                        Escanear de nuevo
+                        <i class="fa-solid fa-redo"></i> Escanear de nuevo
                     </button>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- ══════════════════════════════════════════
+         MODAL TUTORIAL
+    ══════════════════════════════════════════ -->
+    <div class="tutorial-overlay" id="tutorialOverlay" onclick="handleOverlayClick(event)">
+        <div class="tutorial-modal" id="tutorialModal">
+
+            <div class="tut-header">
+                <div class="tut-header-left">
+                    <div class="tut-icon-wrap">
+                        <i class="fa-solid fa-camera"></i>
+                    </div>
+                    <div class="tut-title-block">
+                        <h2>Tutorial del Escáner</h2>
+                        <p>Aprende a usar FutCam en 5 pasos</p>
+                    </div>
+                </div>
+                <button class="tut-close" onclick="closeTutorial()">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="tut-divider"></div>
+
+            <div class="tut-steps">
+
+                <div class="tut-step">
+                    <div class="tut-num">1</div>
+                    <div class="tut-step-content">
+                        <p class="tut-step-title"><i class="fa-solid fa-hand-pointer"></i> Presiona ESCANEAR</p>
+                        <p class="tut-step-desc">Toca el botón <b>ESCANEAR</b> en la pantalla principal para activar la cámara de tu dispositivo.</p>
+                    </div>
+                </div>
+
+                <div class="tut-step">
+                    <div class="tut-num">2</div>
+                    <div class="tut-step-content">
+                        <p class="tut-step-title"><i class="fa-solid fa-shirt"></i> Apunta al objeto</p>
+                        <p class="tut-step-desc">Dirige la cámara hacia tu <b>camisa, bandera o logo</b> de fútbol. Mantén el objeto dentro del <b>marco azul</b> que aparece en pantalla.</p>
+                    </div>
+                </div>
+
+                <div class="tut-step">
+                    <div class="tut-num">3</div>
+                    <div class="tut-step-content">
+                        <p class="tut-step-title"><i class="fa-solid fa-lightbulb"></i> Buena iluminación</p>
+                        <p class="tut-step-desc">Asegúrate de estar en un lugar <b>bien iluminado</b>. El escáner detecta colores, así que evita sombras o luces muy intensas.</p>
+                    </div>
+                </div>
+
+                <div class="tut-step">
+                    <div class="tut-num">4</div>
+                    <div class="tut-step-content">
+                        <p class="tut-step-title"><i class="fa-solid fa-camera"></i> Captura la imagen</p>
+                        <p class="tut-step-desc">Cuando el objeto esté centrado, presiona <b>Capturar</b>. El sistema analizará los colores y generará un <b>modelo 3D</b> automáticamente.</p>
+                    </div>
+                </div>
+
+                <div class="tut-step">
+                    <div class="tut-num">5</div>
+                    <div class="tut-step-content">
+                        <p class="tut-step-title"><i class="fa-solid fa-vr-cardboard"></i> Explora en 3D y AR</p>
+                        <p class="tut-step-desc">Con el modelo listo puedes <b>rotarlo, animarlo</b> y verlo en <b>Realidad Aumentada</b> con el botón VER EN AR.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="tut-tips">
+                <i class="fa-solid fa-star"></i>
+                <p><b>¿Sabías que?</b> El escáner detecta colores: <b>verde/rojo</b> genera el Águila de México, <b>blanco/negro</b> un balón de fútbol y <b>dorado</b> el Trofeo FIFA.</p>
+            </div>
+
+            <div class="tut-footer">
+                <button class="tut-cta" onclick="closeTutorialAndScan()">
+                    <i class="fa-solid fa-camera"></i>
+                    ¡Entendido, vamos a escanear!
+                </button>
+            </div>
+
+        </div>
+    </div>
+
     <script src="js/script.js"></script>
     <script src="js/scanner.js"></script>
+    
 </body>
 </html>

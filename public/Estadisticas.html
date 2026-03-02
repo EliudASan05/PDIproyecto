@@ -2,7 +2,10 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#0a0528">
     <title>FutCam - Estadísticas</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/main.css">
@@ -16,42 +19,31 @@
         </header>
 
         <div class="top-menu">
-            <div class="menu-icon" title="Escáner" onclick="window.location.href='scanner.html'"><i class="fa-solid fa-camera"></i></div>
-            <div class="menu-icon" title="Videos" onclick="window.location.href='main.html'"><i class="fa-solid fa-video"></i></div>
-            <div class="menu-icon" title="Información" onclick="window.location.href='Modelo.html'"><i class="fa-solid fa-cube"></i></div>
+            
+            <div class="menu-icon" title="Videos"  onclick="window.location.href='main.html'"><i class="fa-solid fa-video"></i></div>
+            <div class="menu-icon" title="Info"    onclick="window.location.href='Modelo.html'"><i class="fa-solid fa-cube"></i></div>
             <div class="menu-icon active" title="Estadísticas"><i class="fa-solid fa-chart-bar"></i></div>
             <div class="menu-icon" title="Objetivos" onclick="window.location.href='Tareas.html'"><i class="fa-solid fa-bullseye"></i></div>
         </div>
 
         <div class="matches-container">
-            <!-- Header en vivo -->
             <div class="live-header">
                 <h2>Partidos recientes</h2>
-               <!-- <div class="live-badge">
-                    <div class="live-dot"></div>
-                    EN VIVO
-                </div>
-                -->
             </div>
 
-            <!-- Texto de actualización simulada -->
             <p class="update-timer">Actualizado hace <span id="updateTime">0</span> seg</p>
 
-            <!-- Filtros de jornada -->
             <div class="jornada-filters">
-                <button class="jornada-btn active" onclick="filtrarJornada(0, this)">Todos</button>
-                <button class="jornada-btn" onclick="filtrarJornada(1, this)">J1</button>
-                <button class="jornada-btn" onclick="filtrarJornada(2, this)">J2</button>
-                <button class="jornada-btn" onclick="filtrarJornada(3, this)">J3</button>
+                <button class="jornada-btn active" onclick="filtrarJornada(0,this)">Todos</button>
+                <button class="jornada-btn" onclick="filtrarJornada(1,this)">J1</button>
+                <button class="jornada-btn" onclick="filtrarJornada(2,this)">J2</button>
+                <button class="jornada-btn" onclick="filtrarJornada(3,this)">J3</button>
             </div>
 
-            <!-- Tarjetas generadas por JS -->
             <div id="matchesContainer"></div>
         </div>
 
-        <footer class="main-footer">
-            Eliud / Joshua
-        </footer>
+        <footer class="main-footer">Eliud / Joshua</footer>
     </div>
     <script src="js/estadisticas.js"></script>
 </body>

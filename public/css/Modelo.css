@@ -1,6 +1,8 @@
-/* === Modelo.css Actualizado === */
+/* ============================================================
+   MODELO.CSS — 3D Viewer + AR | Mobile-First Responsive
+   ============================================================ */
 
-/* Sección del modelo — centrado completo */
+/* ── Sección modelo ───────────────────────────────────────── */
 .model-section {
     width: 100%;
     display: flex;
@@ -9,114 +11,100 @@
 }
 
 .model-section .card {
-    background: rgba(20, 20, 30, 0.85);
-    border-radius: 24px;
+    background: rgba(20,20,30,0.85);
+    border-radius: clamp(16px,4vw,24px);
     box-shadow: 0 8px 32px rgba(0,0,0,0.5);
-    padding: 20px;
+    padding: clamp(12px,3vw,20px);
     display: flex;
     flex-direction: column;
     align-items: center;
     border: 1.5px solid rgba(255,255,255,0.08);
     width: 100%;
-    max-width: 520px;
+    max-width: min(520px, 100%);
     margin: 0 auto;
+    gap: clamp(10px,2.5vw,16px);
 }
 
-/* Visualizador 3D */
+/* ── Visualizador 3D ──────────────────────────────────────── */
 .model-viewer {
     position: relative;
     width: 100%;
-    max-width: 480px;
-    height: 400px;
-    background: linear-gradient(145deg, #1a1a2e, #0f0f1e);
-    border-radius: 20px;
+    max-width: min(480px, 100%);
+    /* Altura fluida: nunca menos de 240px ni más de 420px */
+    height: clamp(240px, 55vw, 420px);
+    background: linear-gradient(145deg,#1a1a2e,#0f0f1e);
+    border-radius: clamp(14px,3vw,20px);
     overflow: hidden;
-    margin: 0 auto 20px auto;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
-    border: 2px solid rgba(0, 212, 255, 0.3);
+    margin: 0 auto;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+    border: 2px solid rgba(0,212,255,0.3);
 }
 
 #threeCanvas {
-    width: 100%;
-    height: 100%;
+    width: 100%; height: 100%;
     display: block;
 }
 
-/* Overlay de carga */
+/* ── Loading overlay ──────────────────────────────────────── */
 .loading-overlay {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.8);
+    inset: 0;
+    background: rgba(0,0,0,0.82);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     z-index: 10;
     transition: opacity 0.5s ease;
+    gap: clamp(12px,3vw,20px);
 }
 
-.loading-overlay.hidden {
-    opacity: 0;
-    pointer-events: none;
-}
+.loading-overlay.hidden { opacity: 0; pointer-events: none; }
 
 .loading-spinner {
-    width: 50px;
-    height: 50px;
-    border: 4px solid rgba(255, 255, 255, 0.1);
-    border-top: 4px solid #00d4ff;
+    width: clamp(36px,10vw,50px);
+    height: clamp(36px,10vw,50px);
+    border: 4px solid rgba(255,255,255,0.1);
+    border-top-color: #00d4ff;
     border-radius: 50%;
     animation: spin 1s linear infinite;
-    margin-bottom: 20px;
 }
 
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
+@keyframes spin { to { transform: rotate(360deg); } }
 
 .loading-overlay p {
     color: #fff;
-    font-size: 16px;
+    font-size: clamp(13px,3.5vw,16px);
     font-weight: 600;
+    text-align: center;
 }
 
-/* Controles de rotación */
+/* ── Flechas de rotación ──────────────────────────────────── */
 .model-arrows {
     display: flex;
     justify-content: center;
-    gap: 18px;
-    margin: 0 0 12px 0;
+    gap: clamp(12px,4vw,18px);
     width: 100%;
 }
 
 .model-arrows .filter-btn {
     background: #fff;
     color: #222;
-    font-size: 1.5rem;
-    padding: 10px 18px;
+    font-size: clamp(1.1rem,4vw,1.5rem);
+    padding: clamp(8px,2.5vw,10px) clamp(14px,4vw,18px);
+    min-height: 48px;
+    min-width: 56px;
     transition: all 0.3s ease;
 }
 
-.model-arrows .filter-btn:hover {
-    background: #00d4ff;
-    color: #fff;
-    transform: scale(1.1);
-}
+.model-arrows .filter-btn:hover  { background: #00d4ff; color: #fff; transform: scale(1.08); }
+.model-arrows .filter-btn:active { transform: scale(0.94); }
 
-.model-arrows .filter-btn:active {
-    transform: scale(0.95);
-}
-
-/* Acciones del modelo */
+/* ── Acciones del modelo ──────────────────────────────────── */
 .model-actions {
     display: flex;
     justify-content: center;
-    gap: 12px;
-    margin-bottom: 10px;
+    gap: clamp(8px,2.5vw,12px);
     flex-wrap: wrap;
     width: 100%;
 }
@@ -125,164 +113,108 @@
     background: #fff;
     color: #222;
     font-weight: 700;
+    font-size: clamp(10px,2.5vw,13px);
+    padding: clamp(8px,2vw,11px) clamp(12px,3vw,18px);
+    min-height: 44px;
     transition: all 0.3s ease;
 }
 
-.model-actions .filter-btn:hover {
-    background: #00d4ff;
-    color: #fff;
-    transform: translateY(-2px);
+.model-actions .filter-btn:hover  { background: #00d4ff; color: #fff; transform: translateY(-2px); }
+.model-actions .filter-btn.active { background: #00d4ff; color: #fff; box-shadow: 0 0 20px rgba(0,212,255,0.5); }
+
+/* ── AR button (inyectado por JS) ─────────────────────────── */
+#arBtn {
+    background: linear-gradient(135deg,#00d4ff,#5a9fff) !important;
+    color: #fff !important;
+    font-weight: 700 !important;
+    border: none !important;
+    display: flex !important;
+    align-items: center;
+    gap: 7px;
+    box-shadow: 0 0 16px rgba(0,212,255,0.4);
 }
 
-.model-actions .filter-btn.active {
-    background: #00d4ff;
-    color: #fff;
-    box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+#arBtn:hover {
+    transform: translateY(-2px) scale(1.04) !important;
+    box-shadow: 0 6px 24px rgba(0,212,255,0.6) !important;
 }
 
-/* Panel de información */
+/* ── Panel de información ─────────────────────────────────── */
 .info-panel {
-    background: rgba(0, 0, 0, 0.7);
-    border-radius: 16px;
-    padding: 20px;
-    margin: 10px 0;
+    background: rgba(0,0,0,0.7);
+    border-radius: clamp(12px,3vw,16px);
+    padding: clamp(14px,4vw,20px);
     width: 100%;
-    max-width: 480px;
-    border: 2px solid rgba(0, 212, 255, 0.3);
+    max-width: min(480px,100%);
+    border: 2px solid rgba(0,212,255,0.3);
     transition: all 0.3s ease;
 }
 
-.info-panel.hidden {
-    display: none;
-}
+.info-panel.hidden { display: none; }
 
 .info-panel h3 {
     color: #00d4ff;
-    font-size: 1.4rem;
-    margin-bottom: 15px;
+    font-size: clamp(1rem,3.5vw,1.4rem);
+    margin-bottom: clamp(10px,3vw,15px);
     text-align: center;
 }
 
 #infoContent {
     color: #e0e0e0;
-    line-height: 1.6;
-    font-size: 14px;
+    line-height: 1.65;
+    font-size: clamp(12px,3vw,14px);
 }
 
-#infoContent p {
-    margin-bottom: 10px;
-}
+#infoContent p { margin-bottom: 8px; }
+#infoContent strong { color: #00d4ff; }
 
-#infoContent strong {
-    color: #00d4ff;
-}
-
-/* Botón para escanear de nuevo */
+/* ── Botón escanear de nuevo ──────────────────────────────── */
 .scan-again-btn {
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255,255,255,0.9);
     color: #222;
     border: 2px solid #fff;
-    border-radius: 12px;
-    padding: 14px 28px;
-    font-size: 16px;
+    border-radius: clamp(10px,2.5vw,12px);
+    padding: clamp(11px,3vw,14px) clamp(20px,5vw,28px);
+    font-size: clamp(13px,3.5vw,16px);
     font-weight: 700;
     cursor: pointer;
     transition: all 0.3s ease;
-    margin-top: 16px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: clamp(6px,2vw,10px);
+    min-height: 48px;
 }
 
-.scan-again-btn:hover {
-    background: #00d4ff;
-    border-color: #00d4ff;
-    color: #fff;
-    transform: scale(1.05);
-}
+.scan-again-btn:hover { background: #00d4ff; border-color: #00d4ff; color: #fff; transform: scale(1.04); }
+.scan-again-btn i { font-size: clamp(15px,4vw,18px); }
 
-.scan-again-btn i {
-    font-size: 18px;
-}
-
-/* ====================================================
-   MENÚ — estados del ícono según sección activa
-   Se controla con clases inyectadas por JS:
-   .menu-scanner-active  → cámara activa
-   .menu-modelo-active   → cubo activo
-   ==================================================== */
-
-/* Ícono cubo: activo cuando se muestra el modelo 3D */
-.top-menu[data-active="modelo"] .menu-icon[data-section="modelo"] {
-    background: rgba(0, 212, 255, 0.2);
+/* ── Menú dinámico (data-active) ──────────────────────────── */
+.top-menu[data-active="modelo"]  .menu-icon[data-section="modelo"] {
+    background: rgba(0,212,255,0.2);
     border: 2px solid #00d4ff;
-    box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
-}
-.top-menu[data-active="modelo"] .menu-icon[data-section="modelo"] .fa-solid {
-    color: #00d4ff;
+    box-shadow: 0 0 20px rgba(0,212,255,0.5);
 }
 
-/* Ícono cámara: activo cuando se muestra el escáner */
-.top-menu[data-active="scanner"] .menu-icon[data-section="scanner"] {
-    background: rgba(0, 212, 255, 0.2);
-    border: 2px solid #00d4ff;
-    box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
-}
-.top-menu[data-active="scanner"] .menu-icon[data-section="scanner"] .fa-solid {
-    color: #00d4ff;
-}
 
-/* Quitar active estático del HTML cuando JS toma control */
 .top-menu[data-active] .menu-icon.active:not([data-section]) {
-    background: rgba(30, 30, 50, 0.7);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(30,30,50,0.7);
+    border: 1px solid rgba(255,255,255,0.1);
     box-shadow: none;
 }
-.top-menu[data-active] .menu-icon.active:not([data-section]) .fa-solid {
-    color: #e0e0e0;
+.top-menu[data-active] .menu-icon.active:not([data-section]) .fa-solid { color: #e0e0e0; }
+
+/* ── Landscape móvil ──────────────────────────────────────── */
+@media (max-height: 500px) and (orientation: landscape) {
+    .model-viewer     { height: clamp(200px,55vw,320px); }
+    .model-section .card { padding: 8px; gap: 8px; }
+    .model-actions    { gap: 6px; }
+    .model-actions .filter-btn { font-size: 10px; padding: 7px 10px; }
 }
 
-/* Responsive */
-@media (max-width: 480px) {
-    .model-viewer {
-        max-width: 98vw;
-        height: 300px;
-    }
-
-    .model-section .card {
-        max-width: 98vw;
-        padding: 12px;
-    }
-
-    .model-arrows .filter-btn {
-        font-size: 1.1rem;
-        padding: 8px 10px;
-    }
-
-    .model-actions {
-        gap: 8px;
-    }
-
-    .model-actions .filter-btn {
-        font-size: 12px;
-        padding: 8px 14px;
-    }
-
-    .info-panel {
-        max-width: 98vw;
-        padding: 15px;
-    }
-
-    .info-panel h3 {
-        font-size: 1.2rem;
-    }
-
-    #infoContent {
-        font-size: 13px;
-    }
-
-    .scan-again-btn {
-        font-size: 14px;
-        padding: 12px 20px;
-    }
+/* ── Pantallas muy pequeñas ───────────────────────────────── */
+@media (max-width: 360px) {
+    .model-viewer { height: 220px; }
+    .model-actions { gap: 6px; }
+    .model-actions .filter-btn { font-size: 9px; padding: 7px 9px; }
+    .scan-again-btn { font-size: 12px; padding: 10px 14px; }
 }

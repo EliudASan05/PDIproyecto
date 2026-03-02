@@ -1,261 +1,252 @@
-/* === Estadisticas.css === */
+/* ============================================================
+   ESTADISTICAS.CSS — Partidos | Mobile-First Responsive
+   ============================================================ */
 
-/*
-
-.estadisticas-title {
-    color: #fff;
-    margin-bottom: 10px;
-    text-align: center;
-    font-size: 1.5rem;
-    font-weight: 600;
+/* ── Contenedor de partidos ───────────────────────────────── */
+.matches-container {
+    width: 100%;
+    max-width: min(500px, 100%);
+    margin: 0 auto;
+    padding-bottom: clamp(14px,4vw,20px);
 }
 
-.estadisticas-card {
+/* ── Header en vivo ───────────────────────────────────────── */
+.live-header {
+    display: flex;
     align-items: center;
-    background: none;
-    box-shadow: none;
-    border: none;
+    justify-content: space-between;
+    margin-bottom: clamp(12px,3vw,18px);
+    padding: 0 clamp(2px,1vw,4px);
+    gap: 10px;
+}
+
+.live-header h2 {
+    color: #fff;
+    font-size: clamp(1rem,4vw,1.15rem);
+    font-weight: 700;
+    margin: 0;
+}
+
+.live-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,40,40,0.15);
+    border: 1.5px solid #ff2828;
+    border-radius: 20px;
+    padding: clamp(3px,1vw,4px) clamp(8px,2.5vw,12px);
+    font-size: clamp(0.65rem,2vw,0.75rem);
+    font-weight: 700;
+    color: #ff5555;
+    letter-spacing: 0.8px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.live-dot {
+    width: clamp(6px,1.5vw,8px);
+    height: clamp(6px,1.5vw,8px);
+    background: #ff2828;
+    border-radius: 50%;
+    animation: blink 1.2s infinite;
+    flex-shrink: 0;
+}
+
+@keyframes blink {
+    0%,100% { opacity: 1; }
+    50%      { opacity: 0.2; }
+}
+
+/* ── Filtros de jornada ───────────────────────────────────── */
+.jornada-filters {
+    display: flex;
+    gap: clamp(6px,2vw,10px);
+    margin-bottom: clamp(14px,4vw,20px);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.jornada-btn {
+    padding: clamp(6px,2vw,8px) clamp(14px,4vw,20px);
+    border-radius: 20px;
+    border: 1.5px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.07);
+    color: #ccc;
+    font-size: clamp(0.76rem,2.5vw,0.85rem);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s;
+    min-height: 36px;
+    min-width: 50px;
+}
+
+.jornada-btn.active,
+.jornada-btn:hover {
+    background: rgba(0,212,255,0.18);
+    border-color: #00d4ff;
+    color: #00d4ff;
+}
+
+/* ── Tarjeta de partido ───────────────────────────────────── */
+.match-card {
+    background: rgba(20,20,35,0.88);
+    border: 1.5px solid rgba(255,255,255,0.08);
+    border-radius: clamp(14px,4vw,20px);
+    padding: clamp(12px,3.5vw,18px) clamp(12px,3.5vw,20px);
+    margin-bottom: clamp(10px,3vw,14px);
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    gap: clamp(8px,2.5vw,12px);
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
-#statsChart {
-    max-width: 90vw;
-    margin: 0 auto;
-    display: block;
+.match-card:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,0.4); }
+.match-card.finalizado { border-left: 4px solid #555; }
+.match-card.en-vivo    { border-left: 4px solid #ff2828; box-shadow: 0 0 20px rgba(255,40,40,0.15); }
+.match-card.proximo    { border-left: 4px solid #00d4ff; }
+
+/* ── Meta del partido ─────────────────────────────────────── */
+.match-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    font-size: clamp(0.65rem,2vw,0.72rem);
+    color: #888;
+    flex-wrap: wrap;
 }
 
-
-.estadisticas-img {
-    width: 480px;
-    height: 220px;
-    max-width: 98vw;
-    border-radius: 18px;
-    background: #fff;
-    display: block;
-    margin: 0 auto;
-    object-fit: cover;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+.match-meta .sede {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: clamp(0.63rem,1.8vw,0.7rem);
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
-@media (max-width: 480px) {
-    .estadisticas-img {
-        width: 98vw;
-        height: auto;
-    }
+.estado-badge {
+    font-weight: 700;
+    font-size: clamp(0.62rem,1.8vw,0.7rem);
+    padding: clamp(2px,0.5vw,2px) clamp(6px,2vw,8px);
+    border-radius: 10px;
+    letter-spacing: 0.4px;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
-*/
+.estado-badge.finalizado { background: rgba(120,120,120,0.2); color: #aaa; }
+.estado-badge.en-vivo    { background: rgba(255,40,40,0.2);   color: #ff5555; }
+.estado-badge.proximo    { background: rgba(0,212,255,0.15);  color: #00d4ff; }
 
-.live-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 18px;
-            padding: 0 4px;
-        }
-        .live-header h2 {
-            color: #fff;
-            font-size: 1.15rem;
-            font-weight: 700;
-            margin: 0;
-        }
-        .live-badge {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            background: rgba(255, 40, 40, 0.15);
-            border: 1.5px solid #ff2828;
-            border-radius: 20px;
-            padding: 4px 12px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: #ff5555;
-            letter-spacing: 1px;
-        }
-        .live-dot {
-            width: 8px;
-            height: 8px;
-            background: #ff2828;
-            border-radius: 50%;
-            animation: blink 1.2s infinite;
-        }
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.2; }
-        }
+/* ── Marcador central ─────────────────────────────────────── */
+.match-score {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(6px,2vw,10px);
+}
 
-        /* ── Filtros de jornada ── */
-        .jornada-filters {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            justify-content: center;
-        }
-        .jornada-btn {
-            padding: 8px 20px;
-            border-radius: 20px;
-            border: 1.5px solid rgba(255,255,255,0.2);
-            background: rgba(255,255,255,0.07);
-            color: #ccc;
-            font-size: 0.85rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.25s;
-        }
-        .jornada-btn.active, .jornada-btn:hover {
-            background: rgba(0, 212, 255, 0.18);
-            border-color: #00d4ff;
-            color: #00d4ff;
-        }
+.team {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(4px,1.5vw,6px);
+    flex: 1;
+    min-width: 0;
+}
 
-        /* ── Tarjeta de partido ── */
-        .match-card {
-            background: rgba(20, 20, 35, 0.88);
-            border: 1.5px solid rgba(255,255,255,0.08);
-            border-radius: 20px;
-            padding: 18px 20px;
-            margin-bottom: 14px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .match-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 28px rgba(0,0,0,0.4);
-        }
-        .match-card.finalizado {
-            border-left: 4px solid #555;
-        }
-        .match-card.en-vivo {
-            border-left: 4px solid #ff2828;
-            box-shadow: 0 0 20px rgba(255,40,40,0.15);
-        }
-        .match-card.proximo {
-            border-left: 4px solid #00d4ff;
-        }
+.team-flag  { font-size: clamp(1.8rem,7vw,2.4rem); line-height: 1; }
 
-        /* Info superior de la tarjeta */
-        .match-meta {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            font-size: 0.72rem;
-            color: #888;
-        }
-        .match-meta .sede {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        .match-meta .estado-badge {
-            font-weight: 700;
-            font-size: 0.7rem;
-            padding: 2px 8px;
-            border-radius: 10px;
-            letter-spacing: 0.5px;
-        }
-        .estado-badge.finalizado { background: rgba(120,120,120,0.2); color: #aaa; }
-        .estado-badge.en-vivo   { background: rgba(255,40,40,0.2);   color: #ff5555; }
-        .estado-badge.proximo   { background: rgba(0,212,255,0.15);  color: #00d4ff; }
+.team-name {
+    font-size: clamp(0.7rem,2.5vw,0.82rem);
+    font-weight: 600;
+    color: #ddd;
+    text-align: center;
+    /* Evita overflow en nombres largos */
+    word-break: break-word;
+    hyphens: auto;
+}
 
-        /* Marcador central */
-        .match-score {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-        }
-        .team {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-            flex: 1;
-        }
-        .team-flag {
-            font-size: 2.4rem;
-            line-height: 1;
-        }
-        .team-name {
-            font-size: 0.82rem;
-            font-weight: 600;
-            color: #ddd;
-            text-align: center;
-        }
-        .score-box {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            flex-shrink: 0;
-        }
-        .score-num {
-            font-size: 2.4rem;
-            font-weight: 800;
-            color: #fff;
-            min-width: 36px;
-            text-align: center;
-            line-height: 1;
-        }
-        .score-sep {
-            font-size: 1.8rem;
-            color: #555;
-            font-weight: 300;
-        }
-        .score-pending {
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: #00d4ff;
-            letter-spacing: 2px;
-        }
+.score-box {
+    display: flex;
+    align-items: center;
+    gap: clamp(3px,1vw,6px);
+    flex-shrink: 0;
+}
 
-        /* Hora del partido */
-        .match-time {
-            text-align: center;
-            font-size: 0.78rem;
-            color: #888;
-        }
-        .match-time span {
-            color: #00d4ff;
-            font-weight: 600;
-        }
+.score-num {
+    font-size: clamp(1.8rem,7vw,2.4rem);
+    font-weight: 800;
+    color: #fff;
+    min-width: clamp(26px,7vw,36px);
+    text-align: center;
+    line-height: 1;
+}
 
-        /* Contenedor de tarjetas */
-        .matches-container {
-            max-width: 500px;
-            margin: 0 auto;
-            padding-bottom: 20px;
-        }
+.score-sep {
+    font-size: clamp(1.2rem,4.5vw,1.8rem);
+    color: #555;
+    font-weight: 300;
+}
 
-        /* Separador de jornada */
-        .jornada-label {
-            text-align: center;
-            font-size: 0.78rem;
-            font-weight: 700;
-            color: #00d4ff;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin: 20px 0 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .jornada-label::before,
-        .jornada-label::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: rgba(0,212,255,0.25);
-        }
+.score-pending {
+    font-size: clamp(1.2rem,5vw,1.6rem);
+    font-weight: 700;
+    color: #00d4ff;
+    letter-spacing: 2px;
+}
 
-        /* Contador de actualización */
-        .update-timer {
-            text-align: center;
-            font-size: 0.72rem;
-            color: #555;
-            margin-top: -10px;
-            margin-bottom: 16px;
-        }
-        .update-timer span { color: #888; }
+/* ── Hora / fecha ─────────────────────────────────────────── */
+.match-time {
+    text-align: center;
+    font-size: clamp(0.68rem,2.2vw,0.78rem);
+    color: #888;
+}
+
+.match-time span { color: #00d4ff; font-weight: 600; }
+
+/* ── Separador de jornada ─────────────────────────────────── */
+.jornada-label {
+    text-align: center;
+    font-size: clamp(0.68rem,2vw,0.78rem);
+    font-weight: 700;
+    color: #00d4ff;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin: clamp(14px,4vw,20px) 0 clamp(8px,2.5vw,12px);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.jornada-label::before,
+.jornada-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(0,212,255,0.25);
+}
+
+/* ── Contador de actualización ────────────────────────────── */
+.update-timer {
+    text-align: center;
+    font-size: clamp(0.66rem,2vw,0.72rem);
+    color: #555;
+    margin-top: clamp(-6px,-1.5vw,-10px);
+    margin-bottom: clamp(10px,3vw,16px);
+}
+
+.update-timer span { color: #888; }
+
+/* ── Pantallas muy pequeñas ───────────────────────────────── */
+@media (max-width: 360px) {
+    .match-card { padding: 10px 10px; }
+    .team-flag  { font-size: 1.5rem; }
+    .score-num  { font-size: 1.5rem; }
+    .team-name  { font-size: 0.65rem; }
+    .jornada-btn { padding: 5px 12px; font-size: 0.72rem; }
+}

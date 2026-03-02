@@ -131,6 +131,37 @@ document.querySelector('.result-btn.save').addEventListener('click', () => {
     link.click();
 });
 
+function openTutorial() {
+            document.getElementById('tutorialOverlay').classList.add('show');
+            document.getElementById('tutorialBtn').classList.remove('pulse');
+        }
+
+        function closeTutorial() {
+            const overlay = document.getElementById('tutorialOverlay');
+            overlay.style.opacity = '0';
+            overlay.style.transition = 'opacity 0.25s ease';
+            setTimeout(() => {
+                overlay.classList.remove('show');
+                overlay.style.opacity = '';
+                overlay.style.transition = '';
+            }, 250);
+        }
+
+        function closeTutorialAndScan() {
+            closeTutorial();
+            setTimeout(() => {
+                document.getElementById('scanButton')?.click();
+            }, 300);
+        }
+
+        function handleOverlayClick(e) {
+            if (e.target === document.getElementById('tutorialOverlay')) closeTutorial();
+        }
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') closeTutorial();
+        });
+
 // Limpiar al cerrar la página
 window.addEventListener('beforeunload', () => {
     closeCamera();

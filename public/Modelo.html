@@ -3,11 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FutCam - Escáner 3D</title>
+    <title>FutCam - Escáner 3D + AR</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/Modelo.css">
     <link rel="stylesheet" href="css/scanner.css">
+    <style>
+        /* ── AR button highlight ── */
+        #arBtn {
+            background: linear-gradient(135deg, #00d4ff, #5a9fff) !important;
+            color: #fff !important;
+            font-weight: 700 !important;
+            letter-spacing: 0.5px;
+            box-shadow: 0 0 18px rgba(0,212,255,0.45);
+            border: none !important;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+        #arBtn:hover {
+            transform: translateY(-2px) scale(1.04);
+            box-shadow: 0 6px 24px rgba(0,212,255,0.6);
+        }
+        #arBtn.active {
+            box-shadow: 0 0 30px rgba(0,212,255,0.9);
+            animation: arPulse 1.5s ease-in-out infinite;
+        }
+        @keyframes arPulse {
+            0%,100% { box-shadow: 0 0 18px rgba(0,212,255,0.5); }
+            50%      { box-shadow: 0 0 36px rgba(0,212,255,0.9); }
+        }
+        /* Asegurar que el canvas sea position:relative dentro del viewer */
+        #modelViewer { position: relative; overflow: hidden; }
+        #threeCanvas { position: relative; z-index: 1; }
+
+        /* Hint de AR superpuesto cuando empieza */
+        #ar-launch-hint {
+            position: absolute;
+            top: 12px; left: 50%; transform: translateX(-50%);
+            background: rgba(0,0,0,0.7);
+            color: #00d4ff;
+            font-size: 0.78rem;
+            font-weight: 700;
+            padding: 6px 16px;
+            border-radius: 20px;
+            border: 1px solid rgba(0,212,255,0.5);
+            pointer-events: none;
+            display: none;
+            z-index: 10;
+            white-space: nowrap;
+        }
+        #ar-launch-hint.show { display: block; }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -16,9 +63,8 @@
             <h1 class="site-title">FutCam</h1>
         </header>
 
-        <!-- data-active se actualiza por JS según la sección visible -->
         <div class="top-menu" id="topMenu" data-active="scanner">
-            <div class="menu-icon" data-section="scanner" title="Escáner 3D"><i class="fa-solid fa-camera"></i></div>
+            
             <div class="menu-icon" title="Videos" onclick="window.location.href='main.html'"><i class="fa-solid fa-video"></i></div>
             <div class="menu-icon" data-section="modelo" title="Modelo 3D"><i class="fa-solid fa-cube"></i></div>
             <div class="menu-icon" title="Estadísticas" onclick="window.location.href='Estadisticas.html'"><i class="fa-solid fa-chart-bar"></i></div>
@@ -76,12 +122,13 @@
             </div>
         </div>
 
-        <!-- Visualizador 3D -->
+        <!-- Visualizador 3D + AR -->
         <div class="model-section hidden" id="modelSection">
             <div class="card">
-                <!-- Canvas 3D -->
+                <!-- Canvas 3D (también usado para AR) -->
                 <div class="model-viewer" id="modelViewer">
                     <canvas id="threeCanvas"></canvas>
+                    <div id="ar-launch-hint">📷 Cámara AR activa</div>
                     <div class="loading-overlay" id="loadingOverlay">
                         <div class="loading-spinner"></div>
                         <p>Procesando imagen...</p>
@@ -94,19 +141,17 @@
                     <button class="filter-btn" id="rotateRight"><i class="fa-solid fa-arrow-right"></i></button>
                 </div>
 
-                <!-- Acciones del modelo -->
+                <!-- Acciones del modelo (el botón AR se inyecta aquí por JS) -->
                 <div class="model-actions">
                     <button class="filter-btn" id="animateBtn">ANIMAR</button>
-                    <button class="filter-btn" id="infoBtn">Información</button>
+                    <button class="filter-btn" id="infoBtn">INFO</button>
                     <button class="filter-btn" id="effectsBtn">EFECTOS</button>
                 </div>
 
                 <!-- Panel de información -->
                 <div class="info-panel hidden" id="infoPanel">
                     <h3 id="infoTitle">Información del Objeto</h3>
-                    <div id="infoContent">
-                        <p>Cargando información...</p>
-                    </div>
+                    <div id="infoContent"><p>Cargando información...</p></div>
                 </div>
 
                 <!-- Botón para volver a escanear -->
@@ -116,12 +161,12 @@
             </div>
         </div>
 
-        <footer class="main-footer">
-            Eliud / Joshua
-        </footer>
+        <footer class="main-footer">Eliud / Joshua</footer>
     </div>
 
+    <!-- Three.js r128 desde CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Nuestro JS con AR -->
     <script type="module" src="js/modelo3d.js"></script>
 </body>
 </html>

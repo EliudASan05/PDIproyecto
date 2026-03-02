@@ -2,7 +2,11 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#0a0528">
     <title>FutCam 1.0</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/main.css">
@@ -14,8 +18,9 @@
             <img src="media/FutCam.png" alt="FutCam Logo" />
             <h1 class="site-title">FutCam</h1>
         </header>
+
         <div class="top-menu">
-            <div class="menu-icon" title="Escáner" onclick="window.location.href='scanner.html'"><i class="fa-solid fa-camera"></i></div>
+            
             <div class="menu-icon active" title="Videos"><i class="fa-solid fa-video"></i></div>
             <div class="menu-icon" title="3D" onclick="window.location.href='Modelo.html'"><i class="fa-solid fa-cube"></i></div>
             <div class="menu-icon" title="Estadísticas" onclick="window.location.href='Estadisticas.html'"><i class="fa-solid fa-chart-bar"></i></div>
@@ -26,23 +31,22 @@
             <!-- Tarjeta 1 -->
             <div class="card">
                 <div class="card-filters">
-                    <button class="filter-btn original active" onclick="applyFilter('video1', 'original', this)">ORIGINAL</button>
-                    <button class="filter-btn blur" onclick="applyFilter('video1', 'blur', this)">DESENFOQUE</button>
-                    <button class="filter-btn pixelated" onclick="applyFilter('video1', 'pixelated', this)">SATURACION</button>
-                    <button class="filter-btn thermal" onclick="applyFilter('video1', 'thermal', this)">TÉRMICO</button>
-                    <button class="filter-btn cold" onclick="applyFilter('video1', 'cold', this)">FRÍO</button>
-                    <label class="filter-btn upload">
+                    <button class="filter-btn original active" onclick="applyFilter('video1','original',this)">ORIGINAL</button>
+                    <button class="filter-btn blur"      onclick="applyFilter('video1','blur',this)">BLUR</button>
+                    <button class="filter-btn pixelated" onclick="applyFilter('video1','pixelated',this)">SAT</button>
+                    <button class="filter-btn thermal"   onclick="applyFilter('video1','thermal',this)">TERM</button>
+                    <button class="filter-btn cold"      onclick="applyFilter('video1','cold',this)">FRÍO</button>
+                    <label class="filter-btn upload" title="Subir video">
                         <i class="fa-solid fa-upload"></i>
-                        <input type="file" accept="video/*" onchange="uploadVideo('video1', this)" style="display: none;">
+                        <input type="file" accept="video/*" onchange="uploadVideo('video1',this)">
                     </label>
                 </div>
                 <div class="card-media">
                     <div class="video-wrapper">
                         <video id="video1" loop muted playsinline>
-                            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
-                            Tu navegador no soporta el elemento de video.
+                            <source src="/media/videos/LuisChavezGol.mp4" type="video/mp4">
                         </video>
-                        <div class="play-button" onclick="togglePlay('video1', this)"></div>
+                        <div class="play-button" onclick="togglePlay('video1',this)"></div>
                     </div>
                 </div>
             </div>
@@ -50,33 +54,29 @@
             <!-- Tarjeta 2 -->
             <div class="card">
                 <div class="card-filters">
-                    <button class="filter-btn original active" onclick="applyFilter('video2', 'original', this)">ORIGINAL</button>
-                    <button class="filter-btn blur" onclick="applyFilter('video2', 'blur', this)">DESENFOQUE</button>
-                    <button class="filter-btn pixelated" onclick="applyFilter('video2', 'pixelated', this)">SATURACION</button>
-                    <button class="filter-btn thermal" onclick="applyFilter('video2', 'thermal', this)">TÉRMICO</button>
-                    <button class="filter-btn cold" onclick="applyFilter('video2', 'cold', this)">FRÍO</button>
-                    <label class="filter-btn upload">
+                    <button class="filter-btn original active" onclick="applyFilter('video2','original',this)">ORIGINAL</button>
+                    <button class="filter-btn blur"      onclick="applyFilter('video2','blur',this)">BLUR</button>
+                    <button class="filter-btn pixelated" onclick="applyFilter('video2','pixelated',this)">SAT</button>
+                    <button class="filter-btn thermal"   onclick="applyFilter('video2','thermal',this)">TERM</button>
+                    <button class="filter-btn cold"      onclick="applyFilter('video2','cold',this)">FRÍO</button>
+                    <label class="filter-btn upload" title="Subir video">
                         <i class="fa-solid fa-upload"></i>
-                        <input type="file" accept="video/*" onchange="uploadVideo('video2', this)" style="display: none;">
+                        <input type="file" accept="video/*" onchange="uploadVideo('video2',this)">
                     </label>
                 </div>
                 <div class="card-media">
                     <div class="video-wrapper">
                         <video id="video2" loop muted playsinline>
-                            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" type="video/mp4">
-                            Tu navegador no soporta el elemento de video.
+                            <source src="/media/videos/MbappeGol1.mp4" type="video/mp4">
                         </video>
-                        <div class="play-button" onclick="togglePlay('video2', this)"></div>
+                        <div class="play-button" onclick="togglePlay('video2',this)"></div>
                     </div>
                 </div>
             </div>
         </div>
-        <footer class="main-footer">
-            Eliud / Joshua
-        </footer>
-    </div>
 
+        <footer class="main-footer">Eliud / Joshua</footer>
+    </div>
     <script src="js/script.js"></script>
 </body>
-
 </html>
