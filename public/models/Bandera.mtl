@@ -1,0 +1,75 @@
+# Blender 4.5.3 LTS MTL File: 'Bandera.blend'
+# www.blender.org
+
+newmtl Material
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd C:/Users/joshu/Downloads/guantes2.png
+map_Bump -bm 1.000000 C:/Users/joshu/Downloads/guantes-coldprotect3/textures/Guantes ColdProtect_pasted__blinn1SG_Normal.png
+
+newmtl Material.002
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd C:/Users/joshu/Downloads/tenis-adidas-campus-light-bad-bunny/textures/bASE.png
+map_Ns C:/Users/joshu/Downloads/tenis-adidas-campus-light-bad-bunny/textures/high_23poly_Bdbo_Roughness.png
+map_refl C:/Users/joshu/Downloads/tenis-adidas-campus-light-bad-bunny/textures/METAL.png
+map_Bump -bm 1.000000 C:/Users/joshu/Downloads/tenis-adidas-campus-light-bad-bunny/textures/high_23poly_Bdbo_Normal.png
+
+newmtl Material.005
+Ns 1000.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.000000 0.000000 0.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl Material.008
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd C:/Users/joshu/Downloads/ChatGPT Image 2 mar 2026, 19_22_22.png
+
+newmtl Material.009
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd C:/Users/joshu/Downloads/ChatGPT Image 2 mar 2026, 20_15_32.png
+
+newmtl Material.010
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.000000 0.000000 0.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl Material.012
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.132281 0.196015 0.250315
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2

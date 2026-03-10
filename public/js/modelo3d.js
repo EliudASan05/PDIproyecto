@@ -2,6 +2,11 @@
 // MODELO3D.JS - Escáner con Realidad Aumentada
 // Usa WebXR Hit Test API con fallback AR manual
 // ===============================================
+import * as THREE from '../libs/three/build/three.module.js';
+
+import { OBJLoader } from '../libs/three/examples/jsm/loaders/OBJLoader.js';
+
+import { MTLLoader } from '../libs/three/examples/jsm/loaders/MTLLoader.js';
 
 // Variables globales Three.js
 let scene, camera, renderer, currentModel;
@@ -45,18 +50,17 @@ const effectsBtn     = document.getElementById('effectsBtn');
 // ── Base de datos de objetos ──────────────────────────────────
 const objectDatabase = {
     bandera_mexico: {
-        name: 'Bandera de México',
-        model: 'eagle',
-        color: 0x00a844,
-        info: {
-            title: 'Águila Real — Símbolo de México',
-            description: `
-                <p><strong>Nombre científico:</strong> Aquila chrysaetos</p>
-                <p><strong>Significado:</strong> El águila representa la fuerza, el coraje y la independencia del pueblo mexicano.</p>
-                <p><strong>Historia:</strong> Según la leyenda azteca, los mexicas fundaron Tenochtitlan donde vieron un águila devorando una serpiente sobre un nopal.</p>
-                <p><strong>Curiosidad:</strong> Puede alcanzar 240 km/h en picada y tiene envergadura de hasta 2.3 m.</p>`
-        }
-    },
+    name: 'Bandera de México',
+    model: 'bandera_obj',
+    color: 0x00a844,
+    info: {
+        title: 'Bandera de México',
+        description: `
+            <p><strong>Significado:</strong> Representa la identidad y soberanía nacional.</p>
+            <p><strong>Colores:</strong> Verde (esperanza), Blanco (unidad), Rojo (sangre de héroes).</p>
+        `
+    }
+},
     futbol: {
         name: 'Balón de Fútbol',
         model: 'ball',
@@ -252,7 +256,7 @@ function create3DModel(objectType) {
     const obj = objectDatabase[objectType] || objectDatabase.default;
 
     switch (obj.model) {
-        case 'eagle':  currentModel = createEagle(obj.color);  break;
+        case 'bandera_obj': loadBanderaOBJ(); return; // MUY IMPORTANTE (es async)
         case 'ball':   currentModel = createBall(obj.color);   break;
         case 'trophy': currentModel = createTrophy(obj.color); break;
         default:       currentModel = createCube(obj.color);
@@ -269,32 +273,7 @@ function create3DModel(objectType) {
     animate();
 }
 
-function createEagle(color) {
-    const g = new THREE.Group();
-    const add = (geo, mat, pos, rot, scale) => {
-        const m = new THREE.Mesh(geo, mat);
-        if (pos)   m.position.set(...pos);
-        if (rot)   m.rotation.set(...rot);
-        if (scale) m.scale.set(...scale);
-        g.add(m); return m;
-    };
-    const bodyMat  = new THREE.MeshPhongMaterial({ color: 0x4a3520, shininess: 60 });
-    const headMat  = new THREE.MeshPhongMaterial({ color: 0xf5f5dc });
-    const beakMat  = new THREE.MeshPhongMaterial({ color: 0xffa500 });
-    const wingMat  = new THREE.MeshPhongMaterial({ color, shininess: 80 });
-    const tailMat  = new THREE.MeshPhongMaterial({ color: 0x4a3520 });
-    const eyeMat   = new THREE.MeshPhongMaterial({ color: 0x111111 });
 
-    add(new THREE.SphereGeometry(0.8, 32, 32), bodyMat, [0,0,0], null, [1,1.2,0.8]);
-    add(new THREE.SphereGeometry(0.5, 32, 32), headMat, [0,1.2,0]);
-    add(new THREE.SphereGeometry(0.05,8,8), eyeMat, [-0.18,1.3,0.42]);
-    add(new THREE.SphereGeometry(0.05,8,8), eyeMat, [ 0.18,1.3,0.42]);
-    add(new THREE.ConeGeometry(0.18,0.4,8), beakMat, [0,1.1,0.55], [Math.PI/2,0,0]);
-    add(new THREE.BoxGeometry(2.2,0.12,1),  wingMat, [-1.3,0,0], [0,0,-Math.PI/7]);
-    add(new THREE.BoxGeometry(2.2,0.12,1),  wingMat, [ 1.3,0,0], [0,0, Math.PI/7]);
-    add(new THREE.ConeGeometry(0.5,1,8),    tailMat, [0,-0.6,-0.8], [Math.PI/2,0,0]);
-    return g;
-}
 
 function createBall(color) {
     const g = new THREE.SphereGeometry(1.5, 32, 32);
@@ -350,6 +329,40 @@ function createCube(color) {
     );
     m.add(edges);
     return m;
+}
+
+function loadBanderaOBJ() {
+
+    const mtlLoader = new MTLLoader();
+    mtlLoader.setPath('/models/'); // cambia si usas otra ruta
+
+    mtlLoader.load('Banderacuello.mtl', (materials) => {
+
+        materials.preload();
+
+        const objLoader = new OBJLoader();
+        objLoader.setMaterials(materials);
+        objLoader.setPath('/models/');
+
+        objLoader.load('Banderacuello.obj', (object) => {
+
+            object.scale.set(0.5, 0.5, 0.5);
+
+            const box = new THREE.Box3().setFromObject(object);
+            const center = box.getCenter(new THREE.Vector3());
+            object.position.sub(center);
+
+            if (arMode) {
+                object.visible = false;
+                object.scale.set(0.3, 0.3, 0.3);
+            }
+
+            currentModel = object;
+            scene.add(currentModel);
+            animate();
+        });
+
+    });
 }
 
 // ══════════════════════════════════════════════════════════════

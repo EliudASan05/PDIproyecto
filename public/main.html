@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/main_custom.css">
+
+
 </head>
 <body>
     <div class="container">
@@ -20,7 +22,6 @@
         </header>
 
         <div class="top-menu">
-            
             <div class="menu-icon active" title="Videos"><i class="fa-solid fa-video"></i></div>
             <div class="menu-icon" title="3D" onclick="window.location.href='Modelo.html'"><i class="fa-solid fa-cube"></i></div>
             <div class="menu-icon" title="Estadísticas" onclick="window.location.href='Estadisticas.html'"><i class="fa-solid fa-chart-bar"></i></div>
@@ -28,8 +29,16 @@
         </div>
 
         <div class="content-list">
-            <!-- Tarjeta 1 -->
+
+            <!-- ══════════════════════════════════════════
+                 TARJETA 1 — MÉXICO 🇲🇽
+            ══════════════════════════════════════════ -->
             <div class="card">
+                <div class="country-label">
+                    <img class="country-flag" src="media/Flag_of_Mexico.png" alt="México">
+                    <span class="country-name">México</span>
+                    <span class="country-group">Grupo A</span>
+                </div>
                 <div class="card-filters">
                     <button class="filter-btn original active" onclick="applyFilter('video1','original',this)">ORIGINAL</button>
                     <button class="filter-btn blur"      onclick="applyFilter('video1','blur',this)">BLUR</button>
@@ -51,8 +60,15 @@
                 </div>
             </div>
 
-            <!-- Tarjeta 2 -->
+            <!-- ══════════════════════════════════════════
+                 TARJETA 2 — COREA DEL SUR 🇰🇷
+            ══════════════════════════════════════════ -->
             <div class="card">
+                <div class="country-label">
+                    <img class="country-flag" src="media/Flag_of_South_Korea.png" alt="Corea del Sur">
+                    <span class="country-name">Corea del Sur</span>
+                    <span class="country-group">Grupo A</span>
+                </div>
                 <div class="card-filters">
                     <button class="filter-btn original active" onclick="applyFilter('video2','original',this)">ORIGINAL</button>
                     <button class="filter-btn blur"      onclick="applyFilter('video2','blur',this)">BLUR</button>
@@ -67,13 +83,284 @@
                 <div class="card-media">
                     <div class="video-wrapper">
                         <video id="video2" loop muted playsinline>
-                            <source src="/media/videos/MbappeGol1.mp4" type="video/mp4">
+                            <source src="/media/videos/KoreaVid.mp4" type="video/mp4">
                         </video>
                         <div class="play-button" onclick="togglePlay('video2',this)"></div>
                     </div>
                 </div>
             </div>
-        </div>
+
+            <!-- ══════════════════════════════════════════
+                 TARJETA 3 — SUDÁFRICA 🇿🇦
+            ══════════════════════════════════════════ -->
+            <div class="card">
+                <div class="country-label">
+                    <img class="country-flag" src="media/Flag_of_South_Africa.png" alt="Sudáfrica">
+                    <span class="country-name">Sudáfrica</span>
+                    <span class="country-group">Grupo A</span>
+                </div>
+                <div class="card-filters">
+                    <button class="filter-btn original active" onclick="applyFilter('video3','original',this)">ORIGINAL</button>
+                    <button class="filter-btn blur"      onclick="applyFilter('video3','blur',this)">BLUR</button>
+                    <button class="filter-btn pixelated" onclick="applyFilter('video3','pixelated',this)">SAT</button>
+                    <button class="filter-btn thermal"   onclick="applyFilter('video3','thermal',this)">TERM</button>
+                    <button class="filter-btn cold"      onclick="applyFilter('video3','cold',this)">FRÍO</button>
+                    <label class="filter-btn upload" title="Subir video">
+                        <i class="fa-solid fa-upload"></i>
+                        <input type="file" accept="video/*" onchange="uploadVideo('video3',this)">
+                    </label>
+                </div>
+                <div class="card-media">
+                    <div class="video-wrapper">
+                        <video id="video3" loop muted playsinline>
+                            <source src="/media/videos/AfricaVid.mp4" type="video/mp4">
+                        </video>
+                        <div class="play-button" onclick="togglePlay('video3',this)"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ══════════════════════════════════════════
+                 TARJETA 4 — EUROPA D (POLONIA 🇵🇱)
+            ══════════════════════════════════════════ -->
+            <div class="card">
+                <div class="country-label">
+                    <img class="country-flag" src="media/Flag_of_Poland.png" alt="Polonia">
+                    <span class="country-name">Polonia</span>
+                    <span class="country-group">Europa D</span>
+                </div>
+                <div class="card-filters">
+                    <button class="filter-btn original active" onclick="applyFilter('video4','original',this)">ORIGINAL</button>
+                    <button class="filter-btn blur"      onclick="applyFilter('video4','blur',this)">BLUR</button>
+                    <button class="filter-btn pixelated" onclick="applyFilter('video4','pixelated',this)">SAT</button>
+                    <button class="filter-btn thermal"   onclick="applyFilter('video4','thermal',this)">TERM</button>
+                    <button class="filter-btn cold"      onclick="applyFilter('video4','cold',this)">FRÍO</button>
+                    <label class="filter-btn upload" title="Subir video">
+                        <i class="fa-solid fa-upload"></i>
+                        <input type="file" accept="video/*" onchange="uploadVideo('video4',this)">
+                    </label>
+                </div>
+                <div class="card-media">
+                    <div class="video-wrapper">
+                        <video id="video4" loop muted playsinline>
+                            <source src="/media/videos/PoloniaVid.mp4" type="video/mp4">
+                        </video>
+                        <div class="play-button" onclick="togglePlay('video4',this)"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ══════════════════════════════════════════
+                 TARJETA 5 — UCRANIA 🇺🇦
+            ══════════════════════════════════════════ -->
+            <div class="card">
+                <div class="country-label">
+                    <img class="country-flag" src="media/Flag_of_Ukraine.png" alt="Ucrania">
+                    <span class="country-name">Ucrania</span>
+                    <span class="country-group">Grupo A</span>
+                </div>
+                <div class="card-filters">
+                    <button class="filter-btn original active" onclick="applyFilter('video5','original',this)">ORIGINAL</button>
+                    <button class="filter-btn blur"      onclick="applyFilter('video5','blur',this)">BLUR</button>
+                    <button class="filter-btn pixelated" onclick="applyFilter('video5','pixelated',this)">SAT</button>
+                    <button class="filter-btn thermal"   onclick="applyFilter('video5','thermal',this)">TERM</button>
+                    <button class="filter-btn cold"      onclick="applyFilter('video5','cold',this)">FRÍO</button>
+                    <label class="filter-btn upload" title="Subir video">
+                        <i class="fa-solid fa-upload"></i>
+                        <input type="file" accept="video/*" onchange="uploadVideo('video5',this)">
+                    </label>
+                </div>
+                <div class="card-media">
+                    <div class="video-wrapper">
+                        <video id="video5" loop muted playsinline>
+                            <source src="/media/videos/UcraniaVid.mp4" type="video/mp4">
+                        </video>
+                        <div class="play-button" onclick="togglePlay('video5',this)"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ══════════════════════════════════════════
+                 TARJETA 6 — TÚNEZ 🇹🇳
+            ══════════════════════════════════════════ -->
+            <div class="card">
+                <div class="country-label">
+                    <img class="country-flag" src="media/Flag_of_Tunisia.png" alt="Túnez">
+                    <span class="country-name">Túnez</span>
+                    <span class="country-group">Grupo A</span>
+                </div>
+                <div class="card-filters">
+                    <button class="filter-btn original active" onclick="applyFilter('video6','original',this)">ORIGINAL</button>
+                    <button class="filter-btn blur"      onclick="applyFilter('video6','blur',this)">BLUR</button>
+                    <button class="filter-btn pixelated" onclick="applyFilter('video6','pixelated',this)">SAT</button>
+                    <button class="filter-btn thermal"   onclick="applyFilter('video6','thermal',this)">TERM</button>
+                    <button class="filter-btn cold"      onclick="applyFilter('video6','cold',this)">FRÍO</button>
+                    <label class="filter-btn upload" title="Subir video">
+                        <i class="fa-solid fa-upload"></i>
+                        <input type="file" accept="video/*" onchange="uploadVideo('video6',this)">
+                    </label>
+                </div>
+                <div class="card-media">
+                    <div class="video-wrapper">
+                        <video id="video6" loop muted playsinline>
+                            <source src="/media/videos/TunisiaVid.mp4" type="video/mp4">
+                        </video>
+                        <div class="play-button" onclick="togglePlay('video6',this)"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ══════════════════════════════════════════
+                 TARJETA 7 — UZBEKISTÁN 🇺🇿
+            ══════════════════════════════════════════ -->
+            <div class="card">
+                <div class="country-label">
+                    <img class="country-flag" src="media/Flag_of_Uzbekistan.png" alt="Uzbekistán">
+                    <span class="country-name">Uzbekistán</span>
+                    <span class="country-group">Grupo A</span>
+                </div>
+                <div class="card-filters">
+                    <button class="filter-btn original active" onclick="applyFilter('video7','original',this)">ORIGINAL</button>
+                    <button class="filter-btn blur"      onclick="applyFilter('video7','blur',this)">BLUR</button>
+                    <button class="filter-btn pixelated" onclick="applyFilter('video7','pixelated',this)">SAT</button>
+                    <button class="filter-btn thermal"   onclick="applyFilter('video7','thermal',this)">TERM</button>
+                    <button class="filter-btn cold"      onclick="applyFilter('video7','cold',this)">FRÍO</button>
+                    <label class="filter-btn upload" title="Subir video">
+                        <i class="fa-solid fa-upload"></i>
+                        <input type="file" accept="video/*" onchange="uploadVideo('video7',this)">
+                    </label>
+                </div>
+                <div class="card-media">
+                    <div class="video-wrapper">
+                        <video id="video7" loop muted playsinline>
+                            <source src="/media/videos/UzbekistanVid.mp4" type="video/mp4">
+                        </video>
+                        <div class="play-button" onclick="togglePlay('video7',this)"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ══════════════════════════════════════════
+                 TARJETA 8 — COLOMBIA 🇨🇴
+            ══════════════════════════════════════════ -->
+            <div class="card">
+                <div class="country-label">
+                    <img class="country-flag" src="media/Flag_of_Colombia.png" alt="Colombia">
+                    <span class="country-name">Colombia</span>
+                    <span class="country-group">Grupo A</span>
+                </div>
+                <div class="card-filters">
+                    <button class="filter-btn original active" onclick="applyFilter('video8','original',this)">ORIGINAL</button>
+                    <button class="filter-btn blur"      onclick="applyFilter('video8','blur',this)">BLUR</button>
+                    <button class="filter-btn pixelated" onclick="applyFilter('video8','pixelated',this)">SAT</button>
+                    <button class="filter-btn thermal"   onclick="applyFilter('video8','thermal',this)">TERM</button>
+                    <button class="filter-btn cold"      onclick="applyFilter('video8','cold',this)">FRÍO</button>
+                    <label class="filter-btn upload" title="Subir video">
+                        <i class="fa-solid fa-upload"></i>
+                        <input type="file" accept="video/*" onchange="uploadVideo('video8',this)">
+                    </label>
+                </div>
+                <div class="card-media">
+                    <div class="video-wrapper">
+                        <video id="video8" loop muted playsinline>
+                            <source src="/media/videos/ColombiaVid.mp4" type="video/mp4">
+                        </video>
+                        <div class="play-button" onclick="togglePlay('video8',this)"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ══════════════════════════════════════════
+                 TARJETA 9 — JAPÓN 🇯🇵
+            ══════════════════════════════════════════ -->
+            <div class="card">
+                <div class="country-label">
+                    <img class="country-flag" src="media/Flag_of_Japan.png" alt="Japón">
+                    <span class="country-name">Japón</span>
+                    <span class="country-group">Grupo A</span>
+                </div>
+                <div class="card-filters">
+                    <button class="filter-btn original active" onclick="applyFilter('video9','original',this)">ORIGINAL</button>
+                    <button class="filter-btn blur"      onclick="applyFilter('video9','blur',this)">BLUR</button>
+                    <button class="filter-btn pixelated" onclick="applyFilter('video9','pixelated',this)">SAT</button>
+                    <button class="filter-btn thermal"   onclick="applyFilter('video9','thermal',this)">TERM</button>
+                    <button class="filter-btn cold"      onclick="applyFilter('video9','cold',this)">FRÍO</button>
+                    <label class="filter-btn upload" title="Subir video">
+                        <i class="fa-solid fa-upload"></i>
+                        <input type="file" accept="video/*" onchange="uploadVideo('video9',this)">
+                    </label>
+                </div>
+                <div class="card-media">
+                    <div class="video-wrapper">
+                        <video id="video9" loop muted playsinline>
+                            <source src="/media/videos/JapanVid.mp4" type="video/mp4">
+                        </video>
+                        <div class="play-button" onclick="togglePlay('video9',this)"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ══════════════════════════════════════════
+                 TARJETA 10 — CABO VERDE 🇨🇻
+            ══════════════════════════════════════════ -->
+            <div class="card">
+                <div class="country-label">
+                    <img class="country-flag" src="media/Flag_of_Cape_Verde.png" alt="Cabo Verde">
+                    <span class="country-name">Cabo Verde</span>
+                    <span class="country-group">Grupo A</span>
+                </div>
+                <div class="card-filters">
+                    <button class="filter-btn original active" onclick="applyFilter('video10','original',this)">ORIGINAL</button>
+                    <button class="filter-btn blur"      onclick="applyFilter('video10','blur',this)">BLUR</button>
+                    <button class="filter-btn pixelated" onclick="applyFilter('video10','pixelated',this)">SAT</button>
+                    <button class="filter-btn thermal"   onclick="applyFilter('video10','thermal',this)">TERM</button>
+                    <button class="filter-btn cold"      onclick="applyFilter('video10','cold',this)">FRÍO</button>
+                    <label class="filter-btn upload" title="Subir video">
+                        <i class="fa-solid fa-upload"></i>
+                        <input type="file" accept="video/*" onchange="uploadVideo('video10',this)">
+                    </label>
+                </div>
+                <div class="card-media">
+                    <div class="video-wrapper">
+                        <video id="video10" loop muted playsinline>
+                            <source src="/media/videos/CaboVerdeVid.mp4" type="video/mp4">
+                        </video>
+                        <div class="play-button" onclick="togglePlay('video10',this)"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ══════════════════════════════════════════
+                 TARJETA 11 — ARABIA SAUDITA 🇸🇦
+            ══════════════════════════════════════════ -->
+            <div class="card">
+                <div class="country-label">
+                    <img class="country-flag" src="media/Flag_of_Saudi_Arabia.png" alt="Arabia Saudita">
+                    <span class="country-name">Arabia Saudita</span>
+                    <span class="country-group">Grupo A</span>
+                </div>
+                <div class="card-filters">
+                    <button class="filter-btn original active" onclick="applyFilter('video11','original',this)">ORIGINAL</button>
+                    <button class="filter-btn blur"      onclick="applyFilter('video11','blur',this)">BLUR</button>
+                    <button class="filter-btn pixelated" onclick="applyFilter('video11','pixelated',this)">SAT</button>
+                    <button class="filter-btn thermal"   onclick="applyFilter('video11','thermal',this)">TERM</button>
+                    <button class="filter-btn cold"      onclick="applyFilter('video11','cold',this)">FRÍO</button>
+                    <label class="filter-btn upload" title="Subir video">
+                        <i class="fa-solid fa-upload"></i>
+                        <input type="file" accept="video/*" onchange="uploadVideo('video11',this)">
+                    </label>
+                </div>
+                <div class="card-media">
+                    <div class="video-wrapper">
+                        <video id="video11" loop muted playsinline>
+                            <source src="/media/videos/ArabiaVid.mp4" type="video/mp4">
+                        </video>
+                        <div class="play-button" onclick="togglePlay('video11',this)"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /content-list -->
 
         <footer class="main-footer">Eliud / Joshua</footer>
     </div>
