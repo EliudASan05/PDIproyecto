@@ -75,6 +75,44 @@ function uploadVideo(videoId, input) {
     }
 }
 
+function togglePhotos(headerEl) {
+            const wrapper = headerEl.nextElementSibling;
+            const icon = headerEl.querySelector('.photos-toggle-icon');
+            const isExpanded = wrapper.classList.contains('expanded');
+
+            wrapper.classList.toggle('expanded', !isExpanded);
+            icon.classList.toggle('open', !isExpanded);
+        }
+
+        /* ── Lightbox ───────────────────────────────────── */
+        function openLightbox(photoItem) {
+            const img = photoItem.querySelector('img');
+            document.getElementById('lightbox-img').src = img.src;
+            document.getElementById('lightbox-caption').textContent = img.alt;
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox(e) {
+            if (e.target === document.getElementById('lightbox')) {
+                _doCloseLightbox();
+            }
+        }
+
+        function closeLightboxBtn() {
+            _doCloseLightbox();
+        }
+
+        function _doCloseLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        /* Close with Escape key */
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') _doCloseLightbox();
+        });
+
 // Limpiar URLs de objetos cuando se cierra la página
 window.addEventListener('beforeunload', () => {
     const videos = document.querySelectorAll('video');

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>FutCam — AR Scanner</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Three.js + MindAR via importmap (requerido desde MindAR v1.2.0) -->
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/",
+            "mindar-image-three": "https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-three.prod.js"
+        }
+    }
+    </script>
+
+    <!-- Tus CSS existentes -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/ModeloAR.css">
+    <link rel="stylesheet" href="css/drawercountry.css">
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════
+     PANTALLA INICIAL — ESCANEO
+════════════════════════════════════════════════════════════ -->
+<div class="container" id="scannerScreen">
+    <!-- Header -->
+    <header class="main-header">
+        <img src="media/FutCam.png" alt="FutCam Logo" onerror="this.style.display='none'">
+        <h1 class="site-title">FutCam</h1>
+    </header>
+
+    <!-- Menú -->
+    <nav class="top-menu">
+        <div class="menu-icon" title="Videos" onclick="window.location.href='main.html'">
+            <i class="fa-solid fa-video"></i>
+        </div>
+        <div class="menu-icon active" title="Modelo AR">
+            <i class="fa-solid fa-cube"></i>
+        </div>
+        <div class="menu-icon" title="Estadísticas" onclick="window.location.href='Estadisticas.html'">
+            <i class="fa-solid fa-chart-bar"></i>
+        </div>
+        <div class="menu-icon" title="Objetivos" onclick="window.location.href='Tareas.html'">
+            <i class="fa-solid fa-bullseye"></i>
+        </div>
+    </nav>
+
+    <!-- Panel central -->
+    <div class="scanner-hero">
+        <!-- Orbe animado -->
+        <div class="orb-wrapper">
+            <div class="orb">
+                <div class="orb-ring r1"></div>
+                <div class="orb-ring r2"></div>
+                <div class="orb-ring r3"></div>
+                <i class="fa-solid fa-vr-cardboard orb-icon"></i>
+            </div>
+        </div>
+
+        <h2 class="scanner-title">Escáner <span>AR</span></h2>
+        <p class="scanner-sub">Apunta la cámara a tu imagen objetivo para ver el modelo 3D en realidad aumentada</p>
+
+        <!-- Instrucciones rápidas -->
+        <div class="steps-row">
+            <div class="step-chip">
+                <span class="step-n">1</span>
+                <span>Apunta al logo</span>
+            </div>
+            <div class="step-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+            <div class="step-chip">
+                <span class="step-n">2</span>
+                <span>Detecta imagen</span>
+            </div>
+            <div class="step-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+            <div class="step-chip">
+                <span class="step-n">3</span>
+                <span>Ve en 3D</span>
+            </div>
+        </div>
+
+        <!-- Botón principal -->
+        <button class="btn-launch" id="btnLaunchAR">
+            <i class="fa-solid fa-camera"></i>
+            <span>INICIAR AR</span>
+        </button>
+
+        <!-- Tutorial toggle -->
+        <button class="btn-tutorial" onclick="toggleTutorial(true)">
+            <i class="fa-solid fa-circle-question"></i> ¿Cómo funciona?
+        </button>
+    </div>
+
+    <footer class="main-footer">Eliud / Joshua</footer>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     PANTALLA AR — MindAR ocupa toda la pantalla
+════════════════════════════════════════════════════════════ -->
+<div id="arScreen" class="ar-fullscreen hidden">
+
+    <!-- MindAR monta aquí el <video> y el <canvas> de Three.js -->
+    <div id="mindar-container" style="width:100%;height:100%;position:relative;"></div>
+
+    <!-- HUD superpuesto -->
+    <div class="ar-hud">
+        <!-- Top bar -->
+        <div class="hud-top">
+            <button class="hud-btn hud-close" id="btnExitAR" title="Salir">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="hud-title">
+                <span class="hud-badge">AR</span>
+                <span id="hudModelName">FutCam Scanner</span>
+            </div>
+            <button class="hud-btn" id="btnInfo" title="Info">
+                <i class="fa-solid fa-circle-info"></i>
+            </button>
+        </div>
+
+        <!-- Reticle hint (desaparece cuando detecta) -->
+        <div class="scan-hint" id="scanHint">
+            <div class="scan-frame-mini">
+                <div class="corner tl"></div><div class="corner tr"></div>
+                <div class="corner bl"></div><div class="corner br"></div>
+                <div class="scan-beam"></div>
+            </div>
+            <p>Busca la imagen objetivo...</p>
+        </div>
+
+        <!-- Notificación de detección -->
+        <div class="detect-toast hidden" id="detectToast">
+            <i class="fa-solid fa-check-circle"></i> ¡Imagen detectada!
+        </div>
+
+        <!-- Controles inferiores -->
+        <div class="hud-bottom">
+            <button class="ctrl-btn" id="btnAnimate" title="Animar">
+                <i class="fa-solid fa-play"></i>
+                <span>Animar</span>
+            </button>
+            <button class="ctrl-btn" id="btnEffects" title="Efectos">
+                <i class="fa-solid fa-sparkles"></i>
+                <span>Efectos</span>
+            </button>
+            <button class="ctrl-btn ctrl-scale-up" id="btnScaleUp" title="Agrandar">
+                <i class="fa-solid fa-plus"></i>
+                <span>Tamaño+</span>
+            </button>
+            <button class="ctrl-btn ctrl-scale-down" id="btnScaleDown" title="Reducir">
+                <i class="fa-solid fa-minus"></i>
+                <span>Tamaño-</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Panel de info deslizable -->
+    <div class="info-drawer hidden" id="infoDrawer">
+        <div class="drawer-handle"></div>
+        <h3 id="drawerTitle">Información</h3>
+        <div id="drawerContent"></div>
+        <button class="drawer-close" onclick="toggleInfo(false)">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     TUTORIAL OVERLAY
+════════════════════════════════════════════════════════════ -->
+<div class="tutorial-overlay hidden" id="tutorialOverlay" onclick="handleTutorialBg(event)">
+    <div class="tutorial-modal">
+        <button class="tut-close" onclick="toggleTutorial(false)">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="tut-icon-wrap">
+            <i class="fa-solid fa-vr-cardboard"></i>
+        </div>
+        <h3>Cómo usar FutCam AR</h3>
+
+        <div class="tut-steps">
+            <div class="tut-step">
+                <div class="tut-num">1</div>
+                <div class="tut-body">
+                    <strong>Prepara la imagen objetivo</strong>
+                    <p>Usa el logo o imagen que compilaste en el archivo <code>.mind</code>.</p>
+                </div>
+            </div>
+            <div class="tut-step">
+                <div class="tut-num">2</div>
+                <div class="tut-body">
+                    <strong>Pulsa "INICIAR AR"</strong>
+                    <p>Acepta el permiso de cámara cuando el navegador lo pida.</p>
+                </div>
+            </div>
+            <div class="tut-step">
+                <div class="tut-num">3</div>
+                <div class="tut-body">
+                    <strong>Apunta a la imagen</strong>
+                    <p>Centra el logo dentro del marco. MindAR detecta el patrón automáticamente.</p>
+                </div>
+            </div>
+            <div class="tut-step">
+                <div class="tut-num">4</div>
+                <div class="tut-body">
+                    <strong>Interactúa con el modelo</strong>
+                    <p>Usa los botones <em>Animar</em>, <em>Efectos</em> y <em>Tamaño</em> para personalizar la experiencia.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="tut-tip">
+            <i class="fa-solid fa-lightbulb"></i>
+            <p><strong>Consejo:</strong> Usa buena iluminación y mantén la imagen plana para mejor detección.</p>
+        </div>
+
+        <button class="btn-launch" style="margin-top:16px;" onclick="toggleTutorial(false)">
+            ¡Entendido!
+        </button>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SCRIPTS
+════════════════════════════════════════════════════════════ -->
+<script type="module" src="js/modeloAR.js"></script>
+<script>
+    function toggleTutorial(show) {
+        document.getElementById('tutorialOverlay').classList.toggle('hidden', !show);
+    }
+    function handleTutorialBg(e) {
+        if (e.target === e.currentTarget) toggleTutorial(false);
+    }
+</script>
+</body>
+</html>
